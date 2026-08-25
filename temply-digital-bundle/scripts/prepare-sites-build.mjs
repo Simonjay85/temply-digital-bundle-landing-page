@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { copyFileSync, existsSync, mkdirSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,5 +17,18 @@ mkdirSync(path.join(dist, "server"), { recursive: true });
 mkdirSync(path.join(dist, ".openai"), { recursive: true });
 copyFileSync(worker, path.join(dist, "server", "index.js"));
 copyFileSync(hosting, path.join(dist, ".openai", "hosting.json"));
+
+const siteUrl = String(process.env.VITE_SITE_URL || "").trim().replace(/\/+$/, "");
+if (/^https?:\/\/[^\s]+$/i.test(siteUrl)) {
+  const escapedSiteUrl = siteUrl.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  writeFileSync(
+    path.join(dist, "client", "sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escapedSiteUrl}/</loc></url></urlset>\n`,
+  );
+
+  const robotsPath = path.join(dist, "client", "robots.txt");
+  const robots = existsSync(robotsPath) ? readFileSync(robotsPath, "utf8").trimEnd() : "User-agent: *\nAllow: /";
+  writeFileSync(robotsPath, `${robots}\nSitemap: ${escapedSiteUrl}/sitemap.xml\n`);
+}
 
 console.log("Prepared Sites build: dist/server/index.js and dist/.openai/hosting.json");

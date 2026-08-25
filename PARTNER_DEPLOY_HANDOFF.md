@@ -1,25 +1,46 @@
 # Partner Deploy Handoff
 
-Ngày bàn giao: 2026-08-15
+Ngày bàn giao: 2026-08-26
 
 ## 1. Project
 
 - Tên app: `temply-digital-bundle`
 - Thư mục app: `temply-digital-bundle/`
-- Loại project: React + Vite frontend, đã có cấu hình đóng gói cho OpenAI Sites
-- Domain dự kiến: `daisylexi.com` (việc nối domain/DNS hoặc quản trị Shopify là bước riêng, không nằm trong repo này)
+- Loại project: React + Vite frontend, có cấu hình đóng gói cho OpenAI Sites
+- Branch triển khai hiện tại: `feat/azurio-inspired-rebuild`
+- Domain public: chưa được cấu hình hoặc xác minh trong repository này
 
-## 2. Tình trạng đã kiểm tra
+## 2. Tình trạng đã kiểm tra cục bộ
 
-- `npm run build`: đã tạo thành công các file Sites cần thiết:
+- `npm install`: hoàn tất.
+- `npm run build`: tạo thành công:
   - `dist/client/index.html`
   - `dist/server/index.js`
   - `dist/.openai/hosting.json`
-- `npm run test:sites`: `4 passed, 0 failed`
-- `temply-digital-bundle/.openai/hosting.json` hiện không khai báo binding `d1` hoặc `r2`.
-- Form checkout hiện là demo frontend; chưa xử lý thanh toán thật và chưa gửi email thật.
+- `npm run test:sites`: test worker/static fallback đã pass.
+- `.openai/hosting.json` hiện không khai báo binding `d1` hoặc `r2`.
+- Local production preview đã được dùng cho browser QA ở desktop, tablet và mobile.
+- Các screenshot QA nằm trong `temply-digital-bundle/qa/`.
 
-## 3. Cách chạy lại trên máy partner
+Build/test xanh chỉ chứng minh source và Sites packaging hoạt động cục bộ. Nó không chứng minh app đã deploy, domain đã trỏ, checkout đã nhận tiền, email đã gửi file, hoặc trang đã được index.
+
+## 3. Runtime configuration
+
+Các biến môi trường hợp lệ:
+
+```text
+VITE_CHECKOUT_URL=https://checkout.example.com/your-product
+VITE_SITE_URL=https://your-public-domain.example
+VITE_CONTACT_EMAIL=hello@example.com
+```
+
+- `VITE_CHECKOUT_URL`: khi có URL `http`/`https` hợp lệ, CTA chuyển thành link checkout mở tab mới. Khi thiếu, trang giữ trạng thái `Bản preview · checkout chưa kết nối` và không ghi nhận thanh toán.
+- `VITE_SITE_URL`: dùng cho canonical, Open Graph URL/image, Product JSON-LD, sitemap và dòng `Sitemap` trong `robots.txt`. Không nên đặt domain giả khi chưa sở hữu hoặc chưa xác minh domain đó.
+- `VITE_CONTACT_EMAIL`: chỉ hiển thị link email khi giá trị có định dạng email hợp lệ.
+
+Không commit giá trị production, token, API key, cookie, password, webhook secret hoặc private key vào repository.
+
+## 4. Cách build và kiểm tra
 
 Từ thư mục `temply-digital-bundle/`:
 
@@ -29,26 +50,31 @@ npm run build
 npm run test:sites
 ```
 
-Sau build, dùng đúng thư mục `temply-digital-bundle/` làm source cho quy trình OpenAI Sites của tài khoản partner.
+Để kiểm tra preview cục bộ sau build:
 
-## 4. Credential và đăng nhập
+```bash
+npm run preview -- --host 0.0.0.0
+```
 
-Không ghi username, password, API key, cookie, token hoặc private key vào file Markdown này.
+Sau build, dùng đúng thư mục `temply-digital-bundle/` làm source cho quy trình OpenAI Sites của tài khoản partner. Không upload `node_modules/`, `.playwright-cli/`, hoặc các screenshot archive nếu quy trình chỉ cần source/build output.
 
-Repo đã được kiểm tra và không có file `.env`, thông tin đăng nhập, hay cấu hình FTP/SSH/Shopify để trích xuất. Partner cần đăng nhập bằng tài khoản của họ trong password manager hoặc dùng cơ chế mời cộng tác viên của nền tảng quản trị domain/hosting.
+## 5. Credential và deploy
 
-Nếu cần gắn `daisylexi.com` sau khi app được deploy, partner cần xác định đúng nơi domain đang được quản lý rồi thực hiện riêng:
+Không có credential, tài khoản thanh toán, domain, DNS, FTP/SSH, Shopify config hoặc provider secret nào được lưu hay trích xuất từ repo này. Partner cần đăng nhập bằng tài khoản của họ trong password manager hoặc cơ chế mời cộng tác viên của nền tảng quản trị.
 
-1. Đăng nhập nền tảng hosting/Sites bằng tài khoản được cấp quyền.
-2. Deploy project `temply-digital-bundle/`.
-3. Thêm domain trong nền tảng hosting theo hướng dẫn của nền tảng.
-4. Cập nhật DNS tại nhà cung cấp domain nếu nền tảng yêu cầu.
-5. Kiểm tra HTTPS và mở trang public bằng cửa sổ ẩn danh.
+Quy trình bàn giao an toàn:
 
-Không gửi password qua Git, Slack, email thường hoặc file `.md`. Nếu bắt buộc phải chuyển quyền truy cập, tạo tài khoản/collaborator riêng cho partner và thu hồi quyền sau khi deploy xong.
+1. Xác nhận checkout URL, phương thức giao file, refund/legal copy và contact email với chủ sản phẩm.
+2. Thiết lập các biến môi trường bằng secret/config manager của nền tảng, không ghi vào Markdown hoặc Git.
+3. Chạy `npm run build` và `npm run test:sites` trong môi trường partner.
+4. Deploy project `temply-digital-bundle/` qua OpenAI Sites.
+5. Mở URL public bằng fresh browser session; kiểm tra HTTPS, asset, hash route fallback, responsive layout, menu, FAQ và CTA.
+6. Chỉ sau khi provider read-back xác nhận, đổi trạng thái từ preview sang checkout sẵn sàng.
 
-## 5. Lưu ý khi nghiệm thu
+## 6. Acceptance boundaries
 
-- Build/test xanh chỉ chứng minh source đóng gói đúng; chưa chứng minh domain public đã trỏ đúng.
-- Sau deploy cần đọc lại URL public, kiểm tra asset, các route frontend và responsive mobile.
-- Form hiện hiển thị thông báo demo; cần tích hợp payment/email backend riêng trước khi coi là checkout production.
+- `VITE_CHECKOUT_URL` không đồng nghĩa với payment/webhook/delivery đã được chứng minh; cần thử nghiệm provider thật ở môi trường được ủy quyền.
+- Giá `$12` là nội dung sản phẩm hiển thị trong page; điều kiện/thuế/refund của provider cần được xác nhận riêng.
+- Product image và CSS previews là visual evidence cho landing page, không phải bằng chứng về toàn bộ file bundle hoặc quyền sử dụng thương mại.
+- Sitemap/canonical là readiness kỹ thuật; không phải bằng chứng Google đã crawl hoặc index.
+- Không gửi password qua Git, Slack, email thường hoặc file `.md`. Dùng quyền collaborator riêng và thu hồi sau khi hoàn tất.

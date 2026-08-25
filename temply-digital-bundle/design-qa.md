@@ -2,48 +2,61 @@
 
 ## Comparison target
 
-- Source visual truth: `../source-desktop-top.png` (desktop) and `../source-mobile-top.png` (mobile), captured from `https://www.digitalproductsellers.com/` on 2026-08-10.
-- Implementation visual truth: `implementation-desktop.png` (desktop) and `implementation-mobile.png` (mobile responsive section).
-- Source desktop / implementation desktop: 1512 × 741-ish CSS px captured at browser device scale factor 1. Both use the top-of-page state.
-- Source mobile: 390 × 844 CSS px, device scale factor 1. Implementation responsive evidence was captured at the same CSS target during responsive inspection; browser screenshot delivery subsequently restored desktop sizing, so `implementation-mobile.png` is retained as the captured visual evidence.
-- Density normalization: both comparison captures were browser raster captures at scale 1; no downsampling applied.
+The visual direction was informed by the provided Azurio creative-agency reference: [azuris-nextjs.vercel.app/index-creative-agency](https://azuris-nextjs.vercel.app/index-creative-agency). The implementation uses the reference's editorial traits—large serif statements, numbered navigation, long-form section rhythm, dark feature band, interactive rows, and a decisive closing CTA—while keeping the Temply Studio product, Vietnamese copy, and locally stored product image original.
 
-## Full-view comparison evidence
+No source-site images, logos, fonts, copy, testimonials, statistics, or checkout claims were copied. The baseline screenshots from the earlier prototype are retained under `archive/pre-azurio/` for history only and are not treated as the current source of truth.
 
-- Desktop source has an editorial split hero, high-contrast serif hierarchy, ivory background and a product-image-led right panel. The implementation retains that visual composition while using an original Temply Studio product mockup, original palette, and new Vietnamese product copy.
-- Mobile source demonstrates a single-column product-led opening. The implementation’s responsive rules place its product art above the copy and use a one-column flow below 760px; DOM inspection found no horizontal overflow during the mobile CSS-target check.
-- Focused regions were needed for hero and FAQ/checkout. The desktop implementation hero was browser-rendered and visually inspected. The mobile capture verifies the typography, FAQ rhythm, and checkout transition at the small-screen target.
+## Current visual system
 
-## Required fidelity surfaces
+- **Typography:** local IBM Plex Serif for display statements and IBM Plex Sans for navigation, metadata, body copy, and controls. No remote font request is required.
+- **Palette:** warm off-white canvas, near-black ink, cobalt navigation/feature band, coral product accent, and sage product stage. The palette is intentionally Temply-specific rather than a reproduction of the reference site's branding.
+- **Layout:** asymmetrical split hero; product-led responsive mobile opening; numbered long-form sections; four-card bundle showcase; dark interactive benefits rows; keyboard-operable how-it-works tabs; FAQ accordion; dark conversion section and footer.
+- **Motion:** image/preview hover movement, menu entry, marquee, accordion easing, and smooth anchor scrolling. `prefers-reduced-motion` and the runtime `data-motion="reduced"` state disable the non-essential movement and transition delays.
+- **Assets:** the baseline Temply product image remains at `src/assets/temply-study-bundle-hero.png`; responsive WebP derivatives and a JPEG fallback are in `src/assets/optimized/`. No new AI-generated imagery was introduced for this rebuild because the existing product image is the most truthful visual evidence available.
 
-- **Fonts and typography:** The source uses a bold editorial serif plus spaced sans UI labels. The implementation uses Playfair Display and DM Sans to retain that hierarchy without copying the source font files. Responsive heading scale is clamped and wraps cleanly.
-- **Spacing and layout rhythm:** Hero, long-form reading blocks, dark benefits band, product showcase, FAQ, and checkout retain the source page’s long-form conversion rhythm. Mobile grids collapse at 760px; responsive DOM testing found no horizontal overflow.
-- **Colors and visual tokens:** The implementation intentionally changes the source’s floral/magenta identity to Temply’s original navy, ivory, terracotta, and sage token set. Contrast remains high in the dark bands and CTA.
-- **Image quality and asset fidelity:** The hero mockup is an original generated Temply-specific stationery/product image saved locally in `src/assets/temply-study-bundle-hero.png`; no source website assets, logos, fonts, or hotlinked images are used.
-- **Copy and content:** All product-specific copy, bundle name, FAQs, price, labels, brand references and checkout text were replaced with Temply Studio content. The checkout form is explicitly frontend-only and does not imply a live purchase.
+## Required screenshot evidence
 
-## Interaction evidence
+The following screenshots are captured from the local production preview after the final build:
 
-- The primary CTA scrolls to `#checkout` (browser test observed `scrollY: 4095`).
-- FAQ disclosure toggles work (the third FAQ reported `aria-expanded: true` after click).
-- The form accepts valid text/email input and swaps its button to a confirmation state after submit.
-- Browser console check returned no errors for the tested desktop and responsive states.
+- `qa/desktop-1440.png` — 1440 × 900 CSS px.
+- `qa/tablet-768.png` — 768 × 1024 CSS px.
+- `qa/mobile-390.png` — 390 × 844 CSS px.
 
-## Findings
+The screenshots are visual QA evidence for the local build. They do not prove public hosting, checkout processing, email delivery, or search indexing.
 
-- No actionable P0, P1, or P2 fidelity issues remain for the intended source-inspired, rebranded prototype.
+## Interaction and accessibility checks
 
-## Follow-up polish
+- Skip link targets `#main-content`.
+- Header menu opens an accessible `dialog`, traps focus, closes on Escape, and restores focus to the trigger.
+- Menu links use real section IDs and close the overlay before scrolling.
+- Feature rows are keyboard-focusable selections with `aria-pressed`; their preview region updates from the selected row.
+- How-it-works controls use the tab pattern with roving `tabIndex`, `aria-selected`, and Arrow-key navigation.
+- FAQ questions expose `aria-expanded` and `aria-controls`, with one answer open at a time.
+- The primary CTA scrolls to `#checkout` in preview mode. When `VITE_CHECKOUT_URL` is valid, it becomes an external checkout link.
+- Preview mode states clearly that it does not record payment, create an order, or send a download email.
+- Decorative CSS previews are `aria-hidden`; the real product image has descriptive Vietnamese alt text and responsive `srcset`/`sizes`.
+- Document language, title, description, Open Graph/Twitter metadata, canonical URL, and Product JSON-LD are applied. Public canonical/sitemap URLs are only generated when `VITE_SITE_URL` is configured.
 
-- [P3] Replace the demo form with the selected payment provider only after product price, delivery asset, legal/refund policy, and payment-account configuration are confirmed.
-- [P3] Replace the generated mockup with the final licensed Temply product covers once those assets are available.
+## Verification record
 
-## Implementation checklist
+Run from `temply-digital-bundle/`:
 
-- [x] Original local product asset added.
-- [x] Source-inspired desktop and mobile long-form sales layout implemented.
-- [x] Core conversion interactions tested.
-- [x] Production build completed.
-- [x] Sites packaging tests passed (4/4).
+```bash
+npm install
+npm run build
+npm run test:sites
+```
 
-final result: passed
+Expected output after the build:
+
+- `dist/client/index.html`
+- `dist/server/index.js`
+- `dist/.openai/hosting.json`
+
+The final report records the exact command results and the preview-only boundary. A configured checkout URL and public site URL were tested as build-time configuration paths, but no real payment provider, domain, or download delivery is claimed by this repository.
+
+## Open items
+
+- Supply the real checkout URL before enabling the purchase link in production.
+- Confirm the delivery mechanism, refund/legal copy, and final licensed product-gallery assets with the product owner.
+- Deploy through the partner's OpenAI Sites account and verify the public URL, HTTPS, assets, frontend fallback route, and mobile rendering from a fresh browser session.

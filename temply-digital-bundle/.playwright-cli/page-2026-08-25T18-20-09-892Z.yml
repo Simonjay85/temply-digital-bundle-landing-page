@@ -1,0 +1,330 @@
+- generic [ref=f5e2]:
+  - link "Bỏ qua phần điều hướng" [ref=f5e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f5e4]:
+    - link "Temply Studio — Trang chủ" [ref=f5e5] [cursor=pointer]:
+      - /url: "#home"
+      - generic [ref=f5e6]: T
+      - generic [ref=f5e7]: Temply Studio
+    - button "Mở menu" [ref=f5e8] [cursor=pointer]:
+      - generic [ref=f5e9]: Menu
+  - main [ref=f5e13]:
+    - region [ref=f5e14]:
+      - generic [ref=f5e15]:
+        - paragraph [ref=f5e16]: Temply Studio / Study Success Bundle
+        - heading "Học có định hướng. Làm hồ sơ có dấu ấn." [level=1] [ref=f5e17]:
+          - generic [ref=f5e18]: Học có định hướng.
+          - generic [ref=f5e19]: Làm hồ sơ có dấu ấn.
+        - paragraph [ref=f5e20]: Một bộ template số gọn gàng để bạn lên kế hoạch học tập, theo dõi mục tiêu và trình bày năng lực theo cách của riêng mình.
+        - generic [ref=f5e21]:
+          - button "Nhận bundle $12" [ref=f5e22] [cursor=pointer]:
+            - generic [ref=f5e23]: Nhận bundle
+            - generic [ref=f5e24]: $12
+          - link "Xem bên trong" [ref=f5e25] [cursor=pointer]:
+            - /url: "#bundle"
+        - paragraph [ref=f5e29]: File chỉnh sửa được · Dùng theo nhịp của bạn
+      - generic [ref=f5e30]:
+        - generic [ref=f5e31]:
+          - img "Bộ Study Success Bundle gồm planner, tracker và các trang template học tập trên bàn làm việc" [ref=f5e35]
+          - paragraph [ref=f5e36]: Study Success Bundle / 01
+        - link "Cuộn đến phần giới thiệu" [ref=f5e37] [cursor=pointer]:
+          - /url: "#statement"
+          - generic [ref=f5e38]: Scroll
+    - region [ref=f5e41]:
+      - generic [ref=f5e42]:
+        - heading "Một hệ thống có chỗ cho cuộc sống thật." [level=2] [ref=f5e43]
+        - paragraph [ref=f5e44]: Bạn không cần thêm một ứng dụng để quản lý những ứng dụng khác. Bạn cần một điểm bắt đầu đủ rõ để biết việc nào quan trọng, đủ linh hoạt để đổi kế hoạch, và đủ đẹp để muốn quay lại.
+    - region [ref=f5e46]:
+      - generic [ref=f5e47]:
+        - generic [ref=f5e48]:
+          - paragraph [ref=f5e49]: 02 / Bên trong bundle
+          - heading "Những trang biến ý định thành việc có thể làm." [level=2] [ref=f5e50]
+        - paragraph [ref=f5e51]: Mỗi phần trong Study Success Bundle có một vai trò rõ ràng. Chọn một trang để bắt đầu, rồi để cả hệ thống đi cùng bạn.
+      - generic [ref=f5e52]:
+        - article [ref=f5e53]:
+          - generic [ref=f5e54]:
+            - img "Planner và các trang dashboard trong Study Success Bundle" [ref=f5e56]
+            - generic [ref=f5e57]: 01 / semester
+          - generic [ref=f5e58]:
+            - generic [ref=f5e59]:
+              - generic [ref=f5e60]: "01"
+              - generic [ref=f5e61]: Planner · Editable file
+            - heading "Semester Planner & Weekly Dashboard" [level=3] [ref=f5e62]
+            - paragraph [ref=f5e63]: Nhìn cả học kỳ ở một nơi, sau đó thu nhỏ thành tuần và ngày có thể bắt đầu ngay.
+            - link "Xem giá và cách nhận" [ref=f5e64] [cursor=pointer]:
+              - /url: "#checkout"
+        - article [ref=f5e68]:
+          - generic [ref=f5e70]:
+            - generic [ref=f5e71]:
+              - generic [ref=f5e73]: Goal Map & Habit Tracker
+              - generic [ref=f5e80]:
+                - generic [ref=f5e81]: Mục tiêu học kỳ
+                - generic [ref=f5e82]: Mốc 01 / Mốc 02 / Mốc 03
+                - generic [ref=f5e83]: Theo dõi điều giữ nhịp
+            - generic [ref=f5e88]: Editable file
+          - generic [ref=f5e89]:
+            - generic [ref=f5e90]:
+              - generic [ref=f5e91]: "02"
+              - generic [ref=f5e92]: Goal map · Tracker
+            - heading "Goal Map & Habit Tracker" [level=3] [ref=f5e93]
+            - paragraph [ref=f5e94]: Biến mục tiêu lớn thành những dấu mốc nhỏ, có thể xem lại mà không tự gây áp lực.
+            - link "Xem giá và cách nhận" [ref=f5e95] [cursor=pointer]:
+              - /url: "#checkout"
+        - article [ref=f5e99]:
+          - generic [ref=f5e101]:
+            - generic [ref=f5e102]:
+              - generic [ref=f5e104]: Academic CV Template
+              - generic [ref=f5e111]:
+                - generic [ref=f5e112]: Tên của bạn
+                - generic [ref=f5e113]: Học tập / Dự án / Hoạt động
+                - generic [ref=f5e114]: Chọn điều đáng nhớ nhất
+            - generic [ref=f5e119]: Editable file
+          - generic [ref=f5e120]:
+            - generic [ref=f5e121]:
+              - generic [ref=f5e122]: "03"
+              - generic [ref=f5e123]: Academic CV · Editable template
+            - heading "Academic CV Template" [level=3] [ref=f5e124]
+            - paragraph [ref=f5e125]: Một bố cục sáng sủa để những môn học, dự án và trải nghiệm của bạn có chỗ đứng rõ ràng.
+            - link "Xem giá và cách nhận" [ref=f5e126] [cursor=pointer]:
+              - /url: "#checkout"
+        - article [ref=f5e130]:
+          - generic [ref=f5e132]:
+            - generic [ref=f5e133]:
+              - generic [ref=f5e135]: Reflection & Review Pages
+              - generic [ref=f5e142]:
+                - generic [ref=f5e143]: Tuần này đã đi qua
+                - generic [ref=f5e144]: Điều hiệu quả / Điều cần đổi
+                - generic [ref=f5e145]: Bước tiếp theo
+            - generic [ref=f5e150]: Editable file
+          - generic [ref=f5e151]:
+            - generic [ref=f5e152]:
+              - generic [ref=f5e153]: "04"
+              - generic [ref=f5e154]: Reflection · Weekly review
+            - heading "Reflection & Review Pages" [level=3] [ref=f5e155]
+            - paragraph [ref=f5e156]: Giữ lại điều đã học, điều cần đổi và bước tiếp theo — thay vì bắt đầu lại từ đầu mỗi tuần.
+            - link "Xem giá và cách nhận" [ref=f5e157] [cursor=pointer]:
+              - /url: "#checkout"
+    - region "Các thành phần trong bundle" [ref=f5e161]:
+      - generic [ref=f5e162]:
+        - generic [ref=f5e163]:
+          - text: Planner
+          - generic [ref=f5e164]: /
+        - generic [ref=f5e165]:
+          - text: Goal Map
+          - generic [ref=f5e166]: /
+        - generic [ref=f5e167]:
+          - text: Habit Tracker
+          - generic [ref=f5e168]: /
+        - generic [ref=f5e169]:
+          - text: Academic CV
+          - generic [ref=f5e170]: /
+        - generic [ref=f5e171]:
+          - text: Weekly Dashboard
+          - generic [ref=f5e172]: /
+        - generic [ref=f5e173]:
+          - text: Reflection
+          - generic [ref=f5e174]: /
+        - generic [ref=f5e175]:
+          - text: Editable Files
+          - generic [ref=f5e176]: /
+        - generic [ref=f5e177]:
+          - text: Digital Access
+          - generic [ref=f5e178]: /
+        - generic [ref=f5e179]:
+          - text: Planner
+          - generic [ref=f5e180]: /
+        - generic [ref=f5e181]:
+          - text: Goal Map
+          - generic [ref=f5e182]: /
+        - generic [ref=f5e183]:
+          - text: Habit Tracker
+          - generic [ref=f5e184]: /
+        - generic [ref=f5e185]:
+          - text: Academic CV
+          - generic [ref=f5e186]: /
+        - generic [ref=f5e187]:
+          - text: Weekly Dashboard
+          - generic [ref=f5e188]: /
+        - generic [ref=f5e189]:
+          - text: Reflection
+          - generic [ref=f5e190]: /
+        - generic [ref=f5e191]:
+          - text: Editable Files
+          - generic [ref=f5e192]: /
+        - generic [ref=f5e193]:
+          - text: Digital Access
+          - generic [ref=f5e194]: /
+      - button "Tạm dừng chuyển động" [ref=f5e195] [cursor=pointer]
+    - region [ref=f5e196]:
+      - generic [ref=f5e197]:
+        - paragraph [ref=f5e198]: 03 / Lợi ích
+        - heading "Một nhịp học rõ hơn, từng bước một." [level=2] [ref=f5e199]
+      - generic [ref=f5e200]:
+        - list "Bốn lợi ích chính" [ref=f5e201]:
+          - listitem [ref=f5e202]:
+            - button "01 Chọn đúng lộ trình" [pressed] [ref=f5e203] [cursor=pointer]:
+              - generic [ref=f5e204]: "01"
+              - generic [ref=f5e205]: Chọn đúng lộ trình
+              - generic [ref=f5e206]: ↗
+            - paragraph [ref=f5e207]: Tách mục tiêu, ưu tiên và thời gian thật để biết mình đang đi về đâu.
+          - listitem [ref=f5e208]:
+            - button "02 Lập kế hoạch dễ làm" [ref=f5e209] [cursor=pointer]:
+              - generic [ref=f5e210]: "02"
+              - generic [ref=f5e211]: Lập kế hoạch dễ làm
+              - generic [ref=f5e212]: ↗
+            - paragraph [ref=f5e213]: Chuyển một học kỳ nhiều việc thành những bước nhỏ có thể nhìn thấy và bắt đầu.
+          - listitem [ref=f5e214]:
+            - button "03 Duy trì nhịp độ" [ref=f5e215] [cursor=pointer]:
+              - generic [ref=f5e216]: "03"
+              - generic [ref=f5e217]: Duy trì nhịp độ
+              - generic [ref=f5e218]: ↗
+            - paragraph [ref=f5e219]: Review để điều chỉnh nhịp, không phải để tự chấm điểm bản thân sau một tuần khó.
+          - listitem [ref=f5e220]:
+            - button "04 Nộp hồ sơ tự tin" [ref=f5e221] [cursor=pointer]:
+              - generic [ref=f5e222]: "04"
+              - generic [ref=f5e223]: Nộp hồ sơ tự tin
+              - generic [ref=f5e224]: ↗
+            - paragraph [ref=f5e225]: Đặt những gì bạn đã làm vào một cấu trúc đủ rõ để người khác nhìn thấy.
+        - 'region "Xem trước: Chọn đúng lộ trình" [ref=f5e226]':
+          - generic [ref=f5e227]:
+            - generic [ref=f5e228]:
+              - generic [ref=f5e233]: Study Success / route
+              - generic [ref=f5e234]:
+                - generic [ref=f5e235]:
+                  - generic [ref=f5e236]: "01"
+                  - generic [ref=f5e237]: Mục tiêu
+                - generic [ref=f5e239]:
+                  - generic [ref=f5e240]: "02"
+                  - generic [ref=f5e241]: Ưu tiên
+                - generic [ref=f5e243]:
+                  - generic [ref=f5e244]: "03"
+                  - generic [ref=f5e245]: Tuần này
+            - generic [ref=f5e248]: Mục tiêu / Tuần này
+          - paragraph [ref=f5e249]: Chọn đúng lộ trình
+    - region [ref=f5e250]:
+      - generic [ref=f5e251]:
+        - generic [ref=f5e252]:
+          - paragraph [ref=f5e253]: 04 / Cách sử dụng
+          - heading "Bắt đầu từ điều gần nhất." [level=2] [ref=f5e254]
+        - paragraph [ref=f5e255]: Không cần dùng hết mọi trang ngay lập tức. Hãy mở đúng mẫu cho bước bạn đang đứng.
+      - generic [ref=f5e256]:
+        - tablist "Các bước sử dụng bundle" [ref=f5e257]:
+          - tab "01 Nhận file Mở bộ file sau khi quy trình mua hàng của nhà cung cấp hoàn tất." [selected] [ref=f5e258] [cursor=pointer]:
+            - generic [ref=f5e259]: "01"
+            - generic [ref=f5e260]: Nhận file
+            - generic [ref=f5e261]: ↗
+            - generic [ref=f5e262]: Mở bộ file sau khi quy trình mua hàng của nhà cung cấp hoàn tất.
+          - tab "02 Chọn mẫu phù hợp Bắt đầu với planner, tracker, CV hoặc trang review đúng với việc trước mắt." [ref=f5e263] [cursor=pointer]:
+            - generic [ref=f5e264]: "02"
+            - generic [ref=f5e265]: Chọn mẫu phù hợp
+            - generic [ref=f5e266]: ↗
+            - generic [ref=f5e267]: Bắt đầu với planner, tracker, CV hoặc trang review đúng với việc trước mắt.
+          - tab "03 Cá nhân hoá nội dung Thay nội dung, màu sắc và chi tiết để template trở thành hệ thống của bạn." [ref=f5e268] [cursor=pointer]:
+            - generic [ref=f5e269]: "03"
+            - generic [ref=f5e270]: Cá nhân hoá nội dung
+            - generic [ref=f5e271]: ↗
+            - generic [ref=f5e272]: Thay nội dung, màu sắc và chi tiết để template trở thành hệ thống của bạn.
+          - tab "04 Dùng theo nhịp của bạn Giữ một nhịp làm việc thực tế, xem lại và điều chỉnh khi lịch học thay đổi." [ref=f5e273] [cursor=pointer]:
+            - generic [ref=f5e274]: "04"
+            - generic [ref=f5e275]: Dùng theo nhịp của bạn
+            - generic [ref=f5e276]: ↗
+            - generic [ref=f5e277]: Giữ một nhịp làm việc thực tế, xem lại và điều chỉnh khi lịch học thay đổi.
+        - tabpanel "Nhận file" [ref=f5e278]:
+          - generic [ref=f5e279]:
+            - generic [ref=f5e280]:
+              - generic [ref=f5e285]: Study Success / route
+              - generic [ref=f5e286]:
+                - generic [ref=f5e287]:
+                  - generic [ref=f5e288]: "01"
+                  - generic [ref=f5e289]: Mục tiêu
+                - generic [ref=f5e291]:
+                  - generic [ref=f5e292]: "02"
+                  - generic [ref=f5e293]: Ưu tiên
+                - generic [ref=f5e295]:
+                  - generic [ref=f5e296]: "03"
+                  - generic [ref=f5e297]: Tuần này
+            - generic [ref=f5e300]: Mục tiêu / Tuần này
+          - generic [ref=f5e301]:
+            - generic [ref=f5e302]: "01"
+            - paragraph [ref=f5e303]: Mở bộ file sau khi quy trình mua hàng của nhà cung cấp hoàn tất.
+    - region [ref=f5e304]:
+      - generic [ref=f5e305]:
+        - paragraph [ref=f5e306]: Những điều có thể kiểm tra
+        - heading "Một sản phẩm số, với kỳ vọng rõ ràng." [level=2] [ref=f5e307]
+        - paragraph [ref=f5e308]: Study Success Bundle không hứa thay bạn học. Nó cung cấp một cấu trúc để bạn tự quyết định điều cần làm, điều cần giữ và điều cần trình bày.
+      - generic [ref=f5e309]:
+        - article [ref=f5e310]:
+          - text: "01"
+          - heading "File số có thể chỉnh sửa" [level=3] [ref=f5e311]
+          - paragraph [ref=f5e312]: Bạn bắt đầu từ cấu trúc có sẵn và thêm nội dung của chính mình.
+        - article [ref=f5e313]:
+          - text: "02"
+          - heading "Các trang có chức năng rõ" [level=3] [ref=f5e314]
+          - paragraph [ref=f5e315]: Planner, tracker, CV và review cùng nằm trong một mạch sử dụng.
+        - article [ref=f5e316]:
+          - text: "03"
+          - heading "Một lần mua cho một bộ file" [level=3] [ref=f5e317]
+          - paragraph [ref=f5e318]: Giá hiện tại của Study Success Bundle là $12, trước khi có các điều kiện khác từ checkout.
+        - article [ref=f5e319]:
+          - text: "04"
+          - heading "Checkout đang ở chế độ preview" [level=3] [ref=f5e320]
+          - paragraph [ref=f5e321]: Chưa có liên kết thanh toán hoặc email giao file nào được cấu hình trong bản này.
+    - region [ref=f5e322]:
+      - generic [ref=f5e323]:
+        - generic [ref=f5e324]:
+          - paragraph [ref=f5e325]: 05 / FAQ
+          - heading "Trước khi bạn bắt đầu." [level=2] [ref=f5e326]
+          - paragraph [ref=f5e327]: Những câu trả lời ngắn để bạn biết bundle này phù hợp với mình ở đâu.
+        - generic [ref=f5e328]:
+          - article [ref=f5e329]:
+            - heading [level=3] [ref=f5e330]:
+              - button "Bundle này dành cho ai?" [expanded] [ref=f5e331] [cursor=pointer]
+            - paragraph [ref=f5e338]: Dành cho sinh viên, người tự học và bất kỳ ai muốn sắp xếp việc học, dự án hoặc hồ sơ theo một cấu trúc rõ ràng hơn.
+          - article [ref=f5e339]:
+            - heading [level=3] [ref=f5e340]:
+              - button "Tôi nhận file như thế nào?" [ref=f5e341] [cursor=pointer]
+          - article [ref=f5e344]:
+            - heading [level=3] [ref=f5e345]:
+              - button "Tôi có cần biết thiết kế không?" [ref=f5e346] [cursor=pointer]
+          - article [ref=f5e349]:
+            - heading [level=3] [ref=f5e350]:
+              - button "Có thể dùng trên điện thoại không?" [ref=f5e351] [cursor=pointer]
+    - region [ref=f5e354]:
+      - generic [ref=f5e355]:
+        - generic [ref=f5e356]:
+          - paragraph [ref=f5e357]: Bản preview · checkout chưa kết nối
+          - heading "Sẵn sàng học nhẹ đầu hơn?" [level=2] [ref=f5e358]
+          - paragraph [ref=f5e359]: Bộ template số giúp người học lên kế hoạch rõ ràng, giữ nhịp ổn định và trình bày hồ sơ học tập với sự tự tin.
+          - generic [ref=f5e360]:
+            - generic [ref=f5e361]: Study Success Bundle
+            - strong [ref=f5e362]: $12
+          - button "Nhận bundle $12" [ref=f5e363] [cursor=pointer]:
+            - generic [ref=f5e364]: Nhận bundle
+            - generic [ref=f5e365]: $12
+          - paragraph [ref=f5e366]
+          - paragraph [ref=f5e367]: Email liên hệ sẽ hiển thị khi được cấu hình.
+        - generic [ref=f5e368]:
+          - img "Ảnh xem trước Study Success Bundle" [ref=f5e370]
+          - generic [ref=f5e371]: Digital product / 2026
+      - paragraph [ref=f5e372]: Đây là sản phẩm số. Không có sản phẩm vật lý được gửi đi. Giá hiển thị là giá của bundle trước khi checkout áp dụng điều kiện riêng.
+  - contentinfo [ref=f5e373]:
+    - generic [ref=f5e374]:
+      - generic [ref=f5e375]:
+        - heading "Temply Studio" [level=2] [ref=f5e376]
+        - paragraph [ref=f5e377]: Digital templates cho những cách học có chủ đích hơn.
+      - button "Về đầu trang" [ref=f5e378] [cursor=pointer]
+    - generic [ref=f5e382]:
+      - navigation "Điều hướng cuối trang" [ref=f5e383]:
+        - link "Trang chủ" [ref=f5e384] [cursor=pointer]:
+          - /url: "#home"
+        - link "Bên trong bundle" [ref=f5e385] [cursor=pointer]:
+          - /url: "#bundle"
+        - link "Lợi ích" [ref=f5e386] [cursor=pointer]:
+          - /url: "#benefits"
+        - link "Cách sử dụng" [ref=f5e387] [cursor=pointer]:
+          - /url: "#how"
+        - link "FAQ" [ref=f5e388] [cursor=pointer]:
+          - /url: "#faq"
+      - generic [ref=f5e389]:
+        - generic [ref=f5e390]: Email liên hệ chưa cấu hình
+        - generic [ref=f5e391]: © 2026 Temply Studio
