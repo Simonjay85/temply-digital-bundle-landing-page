@@ -1,0 +1,18 @@
+# Dependencies and local tooling
+node_modules/
+.vite/
+.vite-temp/
+
+# Generated Sites/Vite output
+dist/
+
+# macOS/editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.local
