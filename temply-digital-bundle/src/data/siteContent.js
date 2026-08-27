@@ -28,24 +28,26 @@ export const siteContent = {
     title: "Study Success Bundle — Temply Studio",
     description:
       "Học có định hướng. Làm hồ sơ có dấu ấn. Study Success Bundle là bộ template số để lên kế hoạch học tập, theo dõi mục tiêu và chuẩn bị hồ sơ rõ ràng hơn.",
-    imagePath: "/src/assets/optimized/temply-study-bundle-hero-1280.webp",
   },
   navItems: [
     { number: "01", label: "Trang chủ", id: "home" },
-    { number: "02", label: "Bên trong bundle", id: "bundle" },
-    { number: "03", label: "Lợi ích", id: "benefits" },
-    { number: "04", label: "Cách sử dụng", id: "how" },
-    { number: "05", label: "FAQ", id: "faq" },
-    { number: "06", label: "Nhận bundle", id: "checkout" },
+    { number: "02", label: "Một hệ thống", id: "intro" },
+    { number: "03", label: "Bên trong bundle", id: "bundle" },
+    { number: "04", label: "Những cách dùng", id: "benefits" },
+    { number: "05", label: "Điều Temply tin", id: "principles" },
+    { number: "06", label: "Ghi chú học tập", id: "editorial" },
+    { number: "07", label: "Nhận bundle", id: "checkout" },
   ],
   hero: {
-    label: "Temply Studio / Study Success Bundle",
-    title: ["Học có định hướng.", "Làm hồ sơ có dấu ấn."],
+    eyebrow: "Temply Studio / Study Success Bundle",
+    supportingLabel: "Digital planning system for intentional learning",
+    title: ["Học có", "định hướng.", "Làm hồ sơ", "có dấu ấn."],
     description:
       "Một bộ template số gọn gàng để bạn lên kế hoạch học tập, theo dõi mục tiêu và trình bày năng lực theo cách của riêng mình.",
-    microcopy: "File chỉnh sửa được · Dùng theo nhịp của bạn",
+    microcopy: "Editable files · Một hệ thống cho những ngày thật",
   },
   statement: {
+    label: "02 / A FEW WORDS",
     title: "Một hệ thống có chỗ cho cuộc sống thật.",
     body:
       "Bạn không cần thêm một ứng dụng để quản lý những ứng dụng khác. Bạn cần một điểm bắt đầu đủ rõ để biết việc nào quan trọng, đủ linh hoạt để đổi kế hoạch, và đủ đẹp để muốn quay lại.",
@@ -56,24 +58,27 @@ export const siteContent = {
       title: "Semester Planner & Weekly Dashboard",
       description:
         "Nhìn cả học kỳ ở một nơi, sau đó thu nhỏ thành tuần và ngày có thể bắt đầu ngay.",
-      tags: ["Planner", "Editable file"],
+      tags: ["Planner", "Weekly dashboard"],
       visual: "planner",
+      alt: "Bố cục planner và weekly dashboard trong Study Success Bundle",
     },
     {
       number: "02",
       title: "Goal Map & Habit Tracker",
       description:
         "Biến mục tiêu lớn thành những dấu mốc nhỏ, có thể xem lại mà không tự gây áp lực.",
-      tags: ["Goal map", "Tracker"],
+      tags: ["Goal map", "Habit tracker"],
       visual: "goals",
+      alt: "Goal map và habit tracker của Study Success Bundle",
     },
     {
       number: "03",
       title: "Academic CV Template",
       description:
         "Một bố cục sáng sủa để những môn học, dự án và trải nghiệm của bạn có chỗ đứng rõ ràng.",
-      tags: ["Academic CV", "Editable template"],
+      tags: ["Academic CV", "Editable file"],
       visual: "cv",
+      alt: "Trang academic CV và các tờ template xếp lớp trong Study Success Bundle",
     },
     {
       number: "04",
@@ -82,7 +87,18 @@ export const siteContent = {
         "Giữ lại điều đã học, điều cần đổi và bước tiếp theo — thay vì bắt đầu lại từ đầu mỗi tuần.",
       tags: ["Reflection", "Weekly review"],
       visual: "reflection",
+      alt: "Các trang reflection và review trong Study Success Bundle",
     },
+  ],
+  marqueeTerms: [
+    "Planner",
+    "Weekly Dashboard",
+    "Goal Map",
+    "Habit Tracker",
+    "Academic CV",
+    "Reflection",
+    "Editable Files",
+    "Digital Download",
   ],
   benefits: [
     {
@@ -91,6 +107,7 @@ export const siteContent = {
       description:
         "Tách mục tiêu, ưu tiên và thời gian thật để biết mình đang đi về đâu.",
       visual: "route",
+      tags: ["Direction", "Priorities"],
     },
     {
       number: "02",
@@ -98,6 +115,7 @@ export const siteContent = {
       description:
         "Chuyển một học kỳ nhiều việc thành những bước nhỏ có thể nhìn thấy và bắt đầu.",
       visual: "plan",
+      tags: ["Semester", "Weekly"],
     },
     {
       number: "03",
@@ -105,6 +123,7 @@ export const siteContent = {
       description:
         "Review để điều chỉnh nhịp, không phải để tự chấm điểm bản thân sau một tuần khó.",
       visual: "rhythm",
+      tags: ["Review", "Habits"],
     },
     {
       number: "04",
@@ -112,81 +131,67 @@ export const siteContent = {
       description:
         "Đặt những gì bạn đã làm vào một cấu trúc đủ rõ để người khác nhìn thấy.",
       visual: "profile",
+      tags: ["Academic CV", "Portfolio"],
     },
   ],
-  steps: [
+  principles: [
     {
       number: "01",
-      title: "Nhận file",
-      description: "Mở bộ file sau khi quy trình mua hàng của nhà cung cấp hoàn tất.",
-      visual: "receive",
+      title: "Để bước tiếp theo đủ rõ",
+      body:
+        "Một template tốt không quyết định thay bạn. Nó làm cho việc cần làm tiếp theo hiện ra đủ gần để bắt đầu.",
+      visual: "principle-route",
     },
     {
       number: "02",
-      title: "Chọn mẫu phù hợp",
-      description: "Bắt đầu với planner, tracker, CV hoặc trang review đúng với việc trước mắt.",
-      visual: "choose",
+      title: "Lập kế hoạch cho lịch thật",
+      body:
+        "Kế hoạch có giá trị khi nó chịu được một tuần bận rộn, một thay đổi bất ngờ và một lần bắt đầu lại.",
+      visual: "principle-plan",
     },
     {
       number: "03",
-      title: "Cá nhân hoá nội dung",
-      description: "Thay nội dung, màu sắc và chi tiết để template trở thành hệ thống của bạn.",
-      visual: "customize",
-    },
-    {
-      number: "04",
-      title: "Dùng theo nhịp của bạn",
-      description: "Giữ một nhịp làm việc thực tế, xem lại và điều chỉnh khi lịch học thay đổi.",
-      visual: "use",
+      title: "Cho năng lực một cấu trúc",
+      body:
+        "Những gì bạn đã học, đã làm và đang theo đuổi xứng đáng được đặt vào một câu chuyện dễ theo dõi.",
+      visual: "principle-profile",
     },
   ],
-  proofItems: [
+  editorialNotes: [
     {
       number: "01",
-      title: "File số có thể chỉnh sửa",
-      body: "Bạn bắt đầu từ cấu trúc có sẵn và thêm nội dung của chính mình.",
+      type: "GHI CHÚ / 03 PHÚT",
+      title: "Cách dùng weekly dashboard mà không bị quá tải",
+      body:
+        "Bắt đầu với một ưu tiên chính, giữ các việc phụ ở một vùng chờ và chỉ mở rộng khi tuần đã có nhịp.",
     },
     {
       number: "02",
-      title: "Các trang có chức năng rõ",
-      body: "Planner, tracker, CV và review cùng nằm trong một mạch sử dụng.",
+      type: "GHI CHÚ / 04 PHÚT",
+      title: "Biến mục tiêu học kỳ thành kế hoạch từng tuần",
+      body:
+        "Đi từ kết quả cần có về những mốc nhỏ, rồi chọn một mốc đủ cụ thể để đưa vào lịch thật.",
     },
     {
       number: "03",
-      title: "Một lần mua cho một bộ file",
-      body: "Giá hiện tại của Study Success Bundle là $12, trước khi có các điều kiện khác từ checkout.",
-    },
-  ],
-  faqItems: [
-    {
-      question: "Bundle này dành cho ai?",
-      answer:
-        "Dành cho sinh viên, người tự học và bất kỳ ai muốn sắp xếp việc học, dự án hoặc hồ sơ theo một cấu trúc rõ ràng hơn.",
-    },
-    {
-      question: "Tôi nhận file như thế nào?",
-      answer: runtimeConfig.checkoutUrl
-        ? "Sau khi thanh toán qua liên kết checkout được cấu hình, cách nhận file sẽ phụ thuộc vào quy trình của nhà cung cấp. Hãy kiểm tra phần hướng dẫn trên trang thanh toán trước khi hoàn tất."
-        : "Liên kết checkout và quy trình giao file chưa được cấu hình trong bản preview này. Trang không ghi nhận thanh toán hoặc gửi email tải xuống.",
-    },
-    {
-      question: "Tôi có cần biết thiết kế không?",
-      answer:
-        "Không. Các mẫu bắt đầu từ bố cục có sẵn; bạn có thể thay nội dung và điều chỉnh những chi tiết phù hợp với cách học của mình.",
-    },
-    {
-      question: "Có thể dùng trên điện thoại không?",
-      answer:
-        "Bạn có thể xem hoặc chỉnh sửa trên điện thoại, tablet hoặc máy tính nếu ứng dụng bạn dùng hỗ trợ loại file tương ứng. Trải nghiệm chỉnh sửa đầy đủ nhất thường là trên laptop hoặc desktop.",
+      type: "GHI CHÚ / 03 PHÚT",
+      title: "Những gì nên giữ trong một academic CV",
+      body:
+        "Giữ lại bối cảnh, vai trò và điều bạn đã tạo ra để người đọc hiểu câu chuyện, không chỉ nhìn thấy danh sách.",
     },
   ],
   footerLinks: [
     { label: "Trang chủ", id: "home" },
+    { label: "Một hệ thống", id: "intro" },
     { label: "Bên trong bundle", id: "bundle" },
-    { label: "Lợi ích", id: "benefits" },
-    { label: "Cách sử dụng", id: "how" },
-    { label: "FAQ", id: "faq" },
+    { label: "Những cách dùng", id: "benefits" },
+    { label: "Điều Temply tin", id: "principles" },
+    { label: "Ghi chú học tập", id: "editorial" },
   ],
+  footer: {
+    line: "Templates cho những ngày học có chủ đích.",
+    copyright: "Temply Studio. Nội dung và sản phẩm thuộc Temply Studio.",
+  },
 };
 
 export const contactHref = runtimeConfig.contactEmail

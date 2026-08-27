@@ -1,6 +1,6 @@
 # Temply Studio — Study Success Bundle
 
-Landing page React + Vite cho Study Success Bundle của Temply Studio. Trang dùng layout editorial lấy cảm hứng từ Azurio nhưng có palette, copy, sản phẩm, assets và interaction system riêng cho Temply.
+Landing page React + Vite cho Study Success Bundle của Temply Studio. Trang dùng editorial composition lấy cảm hứng từ nhịp của Azurio Creative Agency nhưng giữ palette, copy, product evidence, assets và interaction system riêng cho Temply.
 
 ## Chạy local
 
@@ -33,11 +33,11 @@ dist/.openai/hosting.json
 
 ## Nội dung và cấu trúc
 
-- `src/data/siteContent.js` — brand, sản phẩm, navigation, sections, FAQs và runtime config.
-- `src/components/` — header/menu, hero, showcase, feature rows, tabs, FAQ, CTA và footer.
-- `src/styles/` — tokens, global rules, layout và component styling.
-- `src/assets/temply-study-bundle-hero.png` — source product image có sẵn từ baseline.
-- `src/assets/optimized/` — WebP responsive derivatives và JPEG fallback được dùng trong runtime.
+- `src/data/siteContent.js` — brand, sản phẩm, navigation, sections, FAQs, editorial notes và runtime config.
+- `src/components/` — header/menu, hero, showcase, marquee, feature rows, flow tabs, proof, FAQ, CTA và footer.
+- `src/styles/` — visual tokens, global rules, layout và component styling.
+- `src/assets/optimized/` — responsive WebP/JPEG derivatives của product image hiện có.
+- `src/assets/generated/` — original editorial still lifes; runtime dùng WebP, PNG source được giữ để chỉnh sửa lại khi cần.
 - `public/` — favicon, app icon và robots base file.
 - `archive/pre-azurio/` — screenshot/implementation artifacts cũ, không được import vào runtime.
 - `qa/` — screenshot QA cho desktop, tablet và mobile.
@@ -52,12 +52,27 @@ VITE_SITE_URL=https://your-public-domain.example
 VITE_CONTACT_EMAIL=hello@example.com
 ```
 
-Nếu không có `VITE_CHECKOUT_URL`, CTA hiển thị preview state và không thực hiện payment, order creation hoặc email delivery. Chỉ URL `http`/`https` hợp lệ mới được dùng.
+Nếu không có `VITE_CHECKOUT_URL`, CTA hiển thị trạng thái preview và không thực hiện payment, order creation hoặc email delivery. Chỉ URL `http`/`https` hợp lệ mới được dùng.
 
-`VITE_SITE_URL` chỉ được dùng khi domain đã được xác nhận. Khi có giá trị hợp lệ, build tạo `dist/client/sitemap.xml` và thêm `Sitemap` vào `robots.txt`; nếu thiếu, page vẫn chạy nhưng không tuyên bố public canonical/indexing readiness.
+`VITE_SITE_URL` được dùng cho canonical, Open Graph URL/image, Product JSON-LD, sitemap và dòng `Sitemap` trong `robots.txt`. Khi thiếu, page vẫn chạy nhưng không tuyên bố public canonical/indexing readiness.
 
-## Visual and content notes
+`VITE_CONTACT_EMAIL` chỉ hiển thị link email khi giá trị có định dạng email hợp lệ.
 
-The landing page contains no fabricated testimonials, ratings, customer counts, revenue claims, or provider guarantees. Decorative preview cards use generic labels such as “Tên của bạn” and are marked `aria-hidden`; they are not presented as real customer data.
+## Sites packaging
 
-The current checkout copy intentionally describes the delivery path as provider-dependent until the real checkout and file-delivery workflow are supplied.
+Không sửa hoặc xoá `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs` hay `tests/sites-worker.test.mjs` nếu không có yêu cầu riêng. Worker giữ frontend fallback cho route HTML nhưng không biến API/write request thành app shell.
+
+## Deployment verification
+
+Sau khi deploy, kiểm tra tách biệt:
+
+1. origin/service trả đúng build hash và title mới;
+2. public HTTPS domain trả đúng HTML mới với cache-busting request;
+3. asset, menu, anchor, FAQ, theme và responsive browser render;
+4. checkout/provider read-back chỉ khi đã cấu hình URL thật.
+
+Build xanh không tự chứng minh domain, checkout, email delivery, DNS/SSL hoặc search indexing.
+
+## Content boundary
+
+Trang không chứa fabricated testimonials, ratings, customer counts, revenue claims, provider guarantees hoặc Azurio proprietary content. `$12` là giá hiển thị của sản phẩm; điều kiện thuế/refund/delivery của provider cần được xác nhận riêng.
