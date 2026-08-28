@@ -19,6 +19,42 @@ copyFileSync(worker, path.join(dist, "server", "index.js"));
 copyFileSync(hosting, path.join(dist, ".openai", "hosting.json"));
 
 const siteUrl = String(process.env.VITE_SITE_URL || "").trim().replace(/\/+$/, "");
+const pageVariant = String(process.env.VITE_PAGE_VARIANT || "etsy").trim().toLowerCase();
+
+if (pageVariant === "agency") {
+  const title = "DaisyLexi — Independent Creative Studio";
+  const description = "DaisyLexi is an independent creative studio shaping brand systems, digital experiences, landing pages and creative operations for internet businesses.";
+  const canonical = /^https?:\/\/[^\s]+$/i.test(siteUrl) ? `${siteUrl}/` : "";
+  const socialImage = canonical ? `${canonical}agency-social.jpg` : "/agency-social.jpg";
+  let html = readFileSync(index, "utf8");
+  html = html
+    .replace('<html lang="vi">', '<html lang="en">')
+    .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`)
+    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${title}" />`)
+    .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${description}" />`)
+    .replace(/<meta property="og:type" content="[^"]*" \/>/, '<meta property="og:type" content="website" />')
+    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`);
+
+  const additions = [
+    canonical ? `<link rel="canonical" href="${canonical}" />` : "",
+    canonical ? `<meta property="og:url" content="${canonical}" />` : "",
+    `<meta property="og:image" content="${socialImage}" />`,
+    `<meta name="twitter:title" content="${title}" />`,
+    `<meta name="twitter:description" content="${description}" />`,
+    `<meta name="twitter:image" content="${socialImage}" />`,
+    `<script id="daisylexi-webpage-schema" type="application/ld+json">${JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: title,
+      description,
+      ...(canonical ? { url: canonical } : {}),
+    })}</script>`,
+  ].filter(Boolean).join("\n    ");
+
+  html = html.replace("</head>", `    ${additions}\n  </head>`);
+  writeFileSync(index, html);
+}
+
 if (/^https?:\/\/[^\s]+$/i.test(siteUrl)) {
   const escapedSiteUrl = siteUrl.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   writeFileSync(

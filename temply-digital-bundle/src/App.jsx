@@ -18,8 +18,11 @@ import { usePrefersReducedMotion } from "./hooks/usePrefersReducedMotion.js";
 import { siteContent } from "./data/siteContent.js";
 import { applySeoMeta } from "./utils/seo.js";
 import { scrollToId } from "./utils/scroll.js";
+import { AgencyHome } from "./components/AgencyHome.jsx";
+import "./styles/agency.css";
 
 const sectionIds = [...siteContent.navItems.map((item) => item.id), "footer"];
+const pageVariant = String(import.meta.env.VITE_PAGE_VARIANT || "etsy").trim().toLowerCase();
 
 function getInitialTheme() {
   if (typeof window === "undefined") return "light";
@@ -28,7 +31,7 @@ function getInitialTheme() {
   return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-export function App() {
+function EtsyLanding() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme);
   const menuTriggerRef = useRef(null);
@@ -92,4 +95,8 @@ export function App() {
       <SiteFooter />
     </MotionProvider>
   );
+}
+
+export function App() {
+  return pageVariant === "agency" ? <AgencyHome /> : <EtsyLanding />;
 }
