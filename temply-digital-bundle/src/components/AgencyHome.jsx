@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { gsap } from "../motion/gsap.js";
+import { useEffect, useRef, useState } from "react";
+import { AgencyFooter, AgencyHeader, AgencyMenu, Arrow, CapabilityRail } from "./AgencyChrome.jsx";
 
 const projects = [
   {
     index: "01",
+    slug: "performance-growth-system",
     title: "Performance Growth System",
     tags: ["Paid media", "Analytics", "CRO"],
     summary: "A connected acquisition loop that turns campaign signals into faster creative, budget and landing-page decisions.",
@@ -12,6 +13,7 @@ const projects = [
   },
   {
     index: "02",
+    slug: "seo-compounding-engine",
     title: "SEO Content Engine",
     tags: ["SEO", "Content ops", "Internal linking"],
     summary: "A search architecture designed to compound through topic systems, publishing operations and measurable demand capture.",
@@ -20,6 +22,7 @@ const projects = [
   },
   {
     index: "03",
+    slug: "conversion-intelligence-layer",
     title: "Landing Page Conversion System",
     tags: ["Strategy", "UX/UI", "Messaging"],
     summary: "A modular conversion experience that learns from paid traffic and makes message-market fit easier to see.",
@@ -28,6 +31,7 @@ const projects = [
   },
   {
     index: "04",
+    slug: "ai-growth-operations",
     title: "AI Operations Stack",
     tags: ["Automation", "Research", "Workflow design"],
     summary: "A human-led operating layer that connects research, enrichment, reporting and repetitive execution without hiding decisions.",
@@ -39,6 +43,7 @@ const projects = [
 const services = [
   {
     index: "01",
+    slug: "performance-marketing",
     title: "Performance Marketing",
     description: "Campaign systems built for testing, learning and scaling — with media, creative, landing pages and measurement working as one loop.",
     tags: ["Paid Social", "Paid Search", "Native Ads", "Creative Testing", "Funnel Strategy", "Budget Systems"],
@@ -46,6 +51,7 @@ const services = [
   },
   {
     index: "02",
+    slug: "seo-growth-systems",
     title: "SEO Growth Systems",
     description: "SEO built as a compounding operating system, not isolated content — from technical foundations to architecture and publishing workflows.",
     tags: ["Technical SEO", "Topic Clusters", "Content Strategy", "Internal Linking", "Search UX", "Measurement"],
@@ -53,13 +59,23 @@ const services = [
   },
   {
     index: "03",
-    title: "Web & Conversion",
+    slug: "landing-pages-conversion",
+    title: "Landing Pages & Conversion",
     description: "Web experiences designed to turn attention into action, then feed what we learn back into messaging, creative and acquisition.",
     tags: ["Landing Pages", "UX/UI", "Messaging", "CRO", "Speed", "E-commerce Journeys"],
     visual: "conversion",
   },
   {
     index: "04",
+    slug: "analytics-measurement",
+    title: "Analytics & Measurement",
+    description: "Measurement systems designed around the questions a team must answer — with trustworthy instrumentation, data-quality checks and decision-ready reporting.",
+    tags: ["Measurement Strategy", "Tracking Plans", "GA4", "Tag Management", "Data QA", "Decision Dashboards"],
+    visual: "analytics",
+  },
+  {
+    index: "05",
+    slug: "ai-growth-operations",
     title: "AI Growth Operations",
     description: "Automation and AI systems that remove repetitive work, improve research velocity and make growth operations easier to run every week.",
     tags: ["Workflow Design", "Automation", "Research Systems", "Reporting", "Data Enrichment", "AI Assistants"],
@@ -81,27 +97,26 @@ const insights = [
     title: "Build landing pages that learn from paid traffic",
     summary: "Treat the page as a learning surface: capture message signals, creative patterns and friction — not only conversion rate.",
     visual: "conversion",
+    href: "/services/landing-pages-conversion/",
   },
   {
     eyebrow: "SEO · Content Ops",
     title: "Turn SEO content into an operating system",
     summary: "Architecture, internal links and publishing cadence become more valuable when they are managed as one repeatable workflow.",
     visual: "seo",
+    href: "/services/seo-growth-systems/",
   },
   {
     eyebrow: "AI · Growth Ops",
     title: "Use AI without adding operational chaos",
     summary: "The useful AI layer is the one that makes research and execution faster while keeping critical decisions visible to the team.",
     visual: "ai",
+    href: "/services/ai-growth-operations/",
   },
 ];
 
 const contactEmail = String(import.meta.env.VITE_CONTACT_EMAIL || "hello@daisylexi.com").trim();
 const contactHref = `mailto:${contactEmail}`;
-
-function Arrow() {
-  return <span className="dl-arrow" aria-hidden="true">↗</span>;
-}
 
 function DotGrid({ count = 24 }) {
   return (
@@ -184,6 +199,29 @@ function ConversionVisual({ compact = false }) {
   );
 }
 
+function AnalyticsVisual({ compact = false }) {
+  return (
+    <div className={`dl-visual dl-visual--analytics ${compact ? "is-compact" : ""}`} role="img" aria-label="Illustrative analytics and measurement interface showing event quality, decision mapping and channel diagnostics">
+      <div className="dl-panel-chrome"><span>Measurement / control room</span><i>Illustrative model</i></div>
+      <div className="dl-analytics-canvas">
+        <div className="dl-analytics-head"><span>Event quality</span><small>Decision-ready view</small></div>
+        <div className="dl-analytics-score"><strong>96.2</strong><span>Validated<br /><em>Signal integrity</em></span></div>
+        <div className="dl-analytics-matrix">
+          {[
+            ["01", "Acquisition"],
+            ["02", "Search"],
+            ["03", "Landing"],
+            ["04", "Revenue"],
+            ["05", "Retention"],
+            ["06", "Operations"],
+          ].map(([number, label], index) => <div className={index === 3 ? "is-active" : ""} key={label}><span>{number}</span><strong>{label}</strong><i /></div>)}
+        </div>
+        <div className="dl-analytics-foot"><span>Question → Event → Quality → Decision</span><strong>One operating truth</strong></div>
+      </div>
+    </div>
+  );
+}
+
 function AiVisual({ compact = false }) {
   return (
     <div className={`dl-visual dl-visual--ai ${compact ? "is-compact" : ""}`} role="img" aria-label="AI growth operations workflow connecting research, enrichment, human review and reporting">
@@ -210,6 +248,7 @@ function AiVisual({ compact = false }) {
 function SystemVisual({ type, compact = false }) {
   if (type === "seo") return <SeoVisual compact={compact} />;
   if (type === "conversion") return <ConversionVisual compact={compact} />;
+  if (type === "analytics") return <AnalyticsVisual compact={compact} />;
   if (type === "ai") return <AiVisual compact={compact} />;
   return <PerformanceVisual compact={compact} />;
 }
@@ -218,20 +257,21 @@ function HeroSystem() {
   return (
     <div className="dl-hero-system" role="img" aria-label="DaisyLexi connected growth system combining acquisition, search, conversion, analytics and AI operations">
       <div className="dl-hero-system__chrome">
-        <span>DaisyLexi / Growth OS</span>
-        <div><i /> Live system</div>
+        <span>DaisyLexi / Growth OS / Illustrative interface</span>
+        <div><i /> Connected model</div>
       </div>
       <div className="dl-hero-system__layout">
         <aside className="dl-hero-system__rail">
           {[
             ["01", "Acquire"],
-            ["02", "Convert"],
-            ["03", "Measure"],
-            ["04", "Compound"],
+            ["02", "Discover"],
+            ["03", "Convert"],
+            ["04", "Measure"],
+            ["05", "Compound"],
           ].map(([number, label], index) => <div className={index === 0 ? "is-active" : ""} key={label}><span>{number}</span>{label}</div>)}
         </aside>
         <div className="dl-hero-system__main">
-          <div className="dl-hero-system__eyebrow"><span>Connected signal model</span><small>Last 28 days</small></div>
+          <div className="dl-hero-system__eyebrow"><span>Connected signal model</span><small>Illustrative 28-day view</small></div>
           <div className="dl-hero-system__score"><strong>84.6</strong><span>System health<br /><em>+9.8%</em></span></div>
           <div className="dl-hero-system__chart">
             <svg viewBox="0 0 760 260" preserveAspectRatio="none" aria-hidden="true">
@@ -252,6 +292,7 @@ function HeroSystem() {
           <div><i className="is-good" />Creative / Variant 08<strong>Scale</strong></div>
           <div><i />SEO / Cluster 04<strong>Build</strong></div>
           <div><i className="is-good" />LP / Message B<strong>Win</strong></div>
+          <div><i className="is-good" />Analytics / Event QA<strong>Trust</strong></div>
           <div><i />AI Ops / Research<strong>Review</strong></div>
         </aside>
       </div>
@@ -262,6 +303,7 @@ function HeroSystem() {
 
 export function AgencyHome() {
   const rootRef = useRef(null);
+  const menuTriggerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -281,50 +323,48 @@ export function AgencyHome() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
+    const root = rootRef.current;
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const desktopMotion = window.matchMedia?.("(min-width: 761px) and (pointer: fine)").matches;
+    if (!root || reducedMotion || !desktopMotion) return undefined;
 
-  useLayoutEffect(() => {
-    if (!rootRef.current || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    let cancelled = false;
+    let context;
+    const frame = window.requestAnimationFrame(() => {
+      import("../motion/gsap.js").then(({ gsap }) => {
+        if (cancelled || !rootRef.current) return;
+        context = gsap.context(() => {
+          gsap.from(".dl-hero__eyebrow, .dl-hero__copy, .dl-hero__actions", { opacity: 0, y: 18, duration: 0.65, stagger: 0.06, ease: "power3.out" });
+          gsap.from(".dl-hero-system", { opacity: 0, y: 34, scale: 0.99, duration: 0.9, ease: "power3.out", delay: 0.08 });
 
-    const ctx = gsap.context(() => {
-      gsap.from(".dl-hero__line > span", { yPercent: 110, duration: 1.08, stagger: 0.08, ease: "power4.out" });
-      gsap.from(".dl-hero__eyebrow, .dl-hero__copy, .dl-hero__actions", { opacity: 0, y: 20, duration: 0.75, stagger: 0.07, ease: "power3.out", delay: 0.2 });
-      gsap.from(".dl-hero-system", { opacity: 0, y: 44, scale: 0.985, duration: 1.1, ease: "power3.out", delay: 0.38 });
-
-      gsap.utils.toArray(".dl-reveal").forEach((element) => {
-        gsap.from(element, {
-          opacity: 0,
-          y: 36,
-          duration: 0.88,
-          ease: "power3.out",
-          scrollTrigger: { trigger: element, start: "top 88%", once: true },
-        });
+          gsap.utils.toArray(".dl-reveal").forEach((element) => {
+            gsap.from(element, {
+              opacity: 0,
+              y: 32,
+              duration: 0.78,
+              ease: "power3.out",
+              scrollTrigger: { trigger: element, start: "top 90%", once: true },
+            });
+          });
+        }, rootRef);
       });
-    }, rootRef);
+    });
 
-    return () => ctx.revert();
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+      context?.revert();
+    };
   }, []);
 
   return (
     <div className="dl-page" ref={rootRef}>
-      <header className="dl-header">
-        <a href="#top" className="dl-logo" aria-label="DaisyLexi home">DaisyLexi<span>®</span></a>
-        <nav className="dl-header__nav" aria-label="Primary navigation">
-          <a href="/work/">Work</a>
-          <a href="/services/">Services</a>
-          <a href="/about/">About</a>
-        </nav>
-        <div className="dl-header__actions">
-          <a className="dl-header__contact" href="/contact/">Start a Project <Arrow /></a>
-          <button className="dl-menu-trigger" onClick={() => setMenuOpen(true)} aria-label="Open menu" aria-expanded={menuOpen}>Menu</button>
-        </div>
-      </header>
+      <AgencyHeader currentPath="/" menuOpen={menuOpen} onMenuOpen={() => setMenuOpen(true)} triggerRef={menuTriggerRef} />
+      <CapabilityRail currentPath="/" home />
 
       <main>
         <section className="dl-hero" id="top">
-          <div className="dl-hero__eyebrow"><span>Performance · SEO · Web · AI</span><i>Independent growth systems studio</i></div>
+          <div className="dl-hero__eyebrow"><span>Five connected growth systems</span><i>Independent strategy, build and operations studio</i></div>
           <h1 className="dl-hero__title" aria-label="Build growth systems that compound">
             <span className="dl-hero__line"><span>Build growth systems</span></span>
             <span className="dl-hero__line dl-hero__line--indent"><span>that compound.</span></span>
@@ -335,6 +375,7 @@ export function AgencyHome() {
               <a className="dl-button dl-button--dark" href="/contact/">Start a Project <Arrow /></a>
               <a className="dl-button dl-button--line" href="#services">Explore Services <Arrow /></a>
             </div>
+            <div className="dl-hero__operating-note"><span>/ One operating model</span><p>Strategy → Signal → Decision → Action → Learning</p></div>
           </div>
           <HeroSystem />
         </section>
@@ -359,7 +400,7 @@ export function AgencyHome() {
 
           <div className="dl-work-grid">
             {projects.map((project) => (
-              <article className={`dl-work-card dl-work-card--${project.size} dl-reveal`} key={project.title}>
+              <a href={`/work/${project.slug}/`} className={`dl-work-card dl-work-card--${project.size} dl-reveal`} key={project.title}>
                 <div className="dl-work-card__visual"><SystemVisual type={project.visual} compact /></div>
                 <div className="dl-work-card__meta">
                   <span>{project.index}</span>
@@ -369,7 +410,7 @@ export function AgencyHome() {
                     <div className="dl-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
                   </div>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         </section>
@@ -398,7 +439,7 @@ export function AgencyHome() {
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
                   <div className="dl-tags dl-tags--service">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                  <a href="/services/">Explore capability <Arrow /></a>
+                  <a href={`/services/${service.slug}/`}>Explore capability <Arrow /></a>
                 </div>
                 <div className="dl-service__visual"><SystemVisual type={service.visual} /></div>
               </article>
@@ -435,7 +476,7 @@ export function AgencyHome() {
                 <span>{insight.eyebrow} · 0{index + 1}</span>
                 <h3>{insight.title}</h3>
                 <p>{insight.summary}</p>
-                <a href="/work/">Read the note <Arrow /></a>
+                <a href={insight.href}>Explore the system <Arrow /></a>
               </article>
             ))}
           </div>
@@ -459,26 +500,8 @@ export function AgencyHome() {
         </section>
       </main>
 
-      <footer className="dl-footer">
-        <div className="dl-footer__brand"><a href="#top">DaisyLexi®</a><p>Independent growth systems studio for performance, search, conversion, analytics and AI operations.</p></div>
-        <div className="dl-footer__links"><span>Explore</span><a href="/work/">Work</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/etsy/">Etsy</a></div>
-        <div className="dl-footer__links"><span>Connect</span><a href={contactHref}>{contactEmail}</a><a href="/contact/">Start a project ↗</a></div>
-        <div className="dl-footer__bottom"><span>© 2026 DaisyLexi</span><span>Performance · SEO · Web · Analytics · AI</span><a href="#top">Back to top ↑</a></div>
-      </footer>
-
-      <div className={`dl-menu ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen}>
-        <div className="dl-menu__top"><a href="#top" onClick={() => setMenuOpen(false)}>DaisyLexi®</a><button onClick={() => setMenuOpen(false)}>Close</button></div>
-        <nav aria-label="Mobile navigation">
-          {[
-            ["01", "Home", "#top"],
-            ["02", "Work", "/work/"],
-            ["03", "Services", "/services/"],
-            ["04", "About", "/about/"],
-            ["05", "Contact", "/contact/"],
-          ].map(([index, item, href]) => <a key={item} href={href} onClick={() => setMenuOpen(false)}><span>/ {index}</span><strong>{item}</strong><Arrow /></a>)}
-        </nav>
-        <div className="dl-menu__foot"><a href={contactHref}>{contactEmail}</a><span>Performance · SEO · Web · AI</span></div>
-      </div>
+      <AgencyFooter />
+      <AgencyMenu open={menuOpen} onClose={() => setMenuOpen(false)} currentPath="/" triggerRef={menuTriggerRef} />
     </div>
   );
 }

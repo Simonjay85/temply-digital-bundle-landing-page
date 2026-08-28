@@ -1,106 +1,19 @@
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
-import { BenefitRows } from "./components/BenefitRows.jsx";
-import { ConversionCta } from "./components/ConversionCta.jsx";
-import { FeaturedEditorial } from "./components/FeaturedEditorial.jsx";
-import { Hero } from "./components/Hero.jsx";
-import { IntroStatement } from "./components/IntroStatement.jsx";
-import { MediaStrip } from "./components/MediaStrip.jsx";
-import { MenuOverlay } from "./components/MenuOverlay.jsx";
-import { MultiMarquee } from "./components/MultiMarquee.jsx";
-import { PageLoader } from "./components/PageLoader.jsx";
-import { PrincipleSlider } from "./components/PrincipleSlider.jsx";
-import { SiteFooter } from "./components/SiteFooter.jsx";
-import { SiteHeader } from "./components/SiteHeader.jsx";
-import { WorksShowcase } from "./components/WorksShowcase.jsx";
-import { MotionProvider } from "./motion/MotionProvider.jsx";
-import { useActiveSection } from "./hooks/useActiveSection.js";
-import { usePrefersReducedMotion } from "./hooks/usePrefersReducedMotion.js";
-import { siteContent } from "./data/siteContent.js";
-import { applySeoMeta } from "./utils/seo.js";
-import { scrollToId } from "./utils/scroll.js";
+import { lazy, Suspense } from "react";
 import { AgencyHome } from "./components/AgencyHome.jsx";
 import "./styles/agency.css";
 
 const AgencyRouter = lazy(() => import("./components/AgencyPages.jsx").then((module) => ({ default: module.AgencyRouter })));
-
-const sectionIds = [...siteContent.navItems.map((item) => item.id), "footer"];
+const EtsyLanding = lazy(() => import("./components/EtsyLanding.jsx").then((module) => ({ default: module.EtsyLanding })));
 const pageVariant = String(import.meta.env.VITE_PAGE_VARIANT || "agency").trim().toLowerCase();
 
-function getInitialTheme() {
-  if (typeof window === "undefined") return "light";
-  const stored = window.localStorage.getItem("temply-theme");
-  if (stored === "dark" || stored === "light") return stored;
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function EtsyLanding() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(getInitialTheme);
-  const menuTriggerRef = useRef(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const activeSection = useActiveSection(sectionIds);
-
-  useEffect(() => {
-    document.documentElement.dataset.motion = prefersReducedMotion ? "reduced" : "full";
-  }, [prefersReducedMotion]);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("temply-theme", theme);
-    document.querySelector("meta[name=\"theme-color\"]")?.setAttribute("content", theme === "dark" ? "#101010" : "#eeebea");
-  }, [theme]);
-
-  useEffect(() => {
-    applySeoMeta();
-  }, []);
-
-  const openMenu = useCallback(() => setMenuOpen(true), []);
-  const closeMenu = useCallback(() => setMenuOpen(false), []);
-  const handlePrimaryAction = useCallback(() => {
-    scrollToId("checkout", prefersReducedMotion);
-  }, [prefersReducedMotion]);
-  const toggleTheme = useCallback(() => {
-    setTheme((value) => (value === "dark" ? "light" : "dark"));
-  }, []);
-
-  return (
-    <MotionProvider reducedMotion={prefersReducedMotion}>
-      <PageLoader />
-      <a className="skip-link" href="#main-content">Bỏ qua phần điều hướng</a>
-      <SiteHeader
-        activeSection={activeSection}
-        menuOpen={menuOpen}
-        onMenuOpen={openMenu}
-        triggerRef={menuTriggerRef}
-        theme={theme}
-        onThemeToggle={toggleTheme}
-      />
-      <MenuOverlay
-        open={menuOpen}
-        onClose={closeMenu}
-        triggerRef={menuTriggerRef}
-        activeSection={activeSection}
-        theme={theme}
-        onThemeToggle={toggleTheme}
-      />
-      <main id="main-content">
-        <Hero onPrimaryAction={handlePrimaryAction} prefersReducedMotion={prefersReducedMotion} />
-        <IntroStatement />
-        <WorksShowcase />
-        <MultiMarquee />
-        <BenefitRows />
-        <PrincipleSlider />
-        <FeaturedEditorial />
-        <ConversionCta />
-        <MediaStrip />
-      </main>
-      <SiteFooter />
-    </MotionProvider>
-  );
+function RouteFallback() {
+  return <div role="status" aria-live="polite" style={{ position: "fixed", inset: 0, display: "grid", placeItems: "center", background: "#f2f0eb", color: "#101310", fontFamily: "Manrope, Arial, sans-serif" }}>Loading DaisyLexi…</div>;
 }
 
 export function App() {
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
-  if (pathname === "/etsy" || pageVariant === "etsy") return <EtsyLanding />;
-  return pathname === "/" ? <AgencyHome /> : <Suspense fallback={null}><AgencyRouter /></Suspense>;
+  if (pathname === "/etsy" || pageVariant === "etsy") {
+    return <Suspense fallback={<RouteFallback />}><EtsyLanding /></Suspense>;
+  }
+  return pathname === "/" ? <AgencyHome /> : <Suspense fallback={<RouteFallback />}><AgencyRouter /></Suspense>;
 }

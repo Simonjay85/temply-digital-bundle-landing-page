@@ -2,6 +2,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { agencyProjects, agencyServices } from "../src/data/agencyPages.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -24,6 +25,16 @@ writeFileSync(path.join(dist, ".openai", "hosting.json"), readFileSync(hosting))
 
 const siteUrl = String(process.env.VITE_SITE_URL || "https://daisylexi.com").trim().replace(/\/+$/, "");
 const pageVariant = String(process.env.VITE_PAGE_VARIANT || "agency").trim().toLowerCase();
+const agencyRoutes = [
+  "/",
+  "/work/",
+  "/services/",
+  "/about/",
+  "/contact/",
+  "/etsy/",
+  ...agencyProjects.map((project) => `/work/${project.slug}/`),
+  ...agencyServices.map((service) => `/services/${service.slug}/`),
+];
 
 if (pageVariant === "agency") {
   const title = "DaisyLexi — Performance Marketing, SEO & AI Growth Systems";
@@ -64,10 +75,15 @@ if (pageVariant === "agency") {
 }
 
 if (/^https?:\/\/[^\s]+$/i.test(siteUrl)) {
-  const escapedSiteUrl = siteUrl.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const escapeXml = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const escapedSiteUrl = escapeXml(siteUrl);
+  const sitemapRoutes = pageVariant === "agency" ? agencyRoutes : ["/"];
+  const sitemapEntries = [...new Set(sitemapRoutes)]
+    .map((route) => `<url><loc>${escapeXml(`${siteUrl}${route}`)}</loc></url>`)
+    .join("");
   writeFileSync(
     path.join(dist, "client", "sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${escapedSiteUrl}/</loc></url></urlset>\n`,
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapEntries}</urlset>\n`,
   );
 
   const robotsPath = path.join(dist, "client", "robots.txt");

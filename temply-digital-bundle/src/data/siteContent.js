@@ -6,11 +6,12 @@ const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 const configuredCheckoutUrl = clean(import.meta.env.VITE_CHECKOUT_URL);
 const configuredSiteUrl = clean(import.meta.env.VITE_SITE_URL).replace(/\/+$/, "");
 const configuredContactEmail = clean(import.meta.env.VITE_CONTACT_EMAIL);
+const defaultContactEmail = "hello@daisylexi.com";
 
 export const runtimeConfig = {
   checkoutUrl: isHttpUrl(configuredCheckoutUrl) ? configuredCheckoutUrl : "",
   siteUrl: isHttpUrl(configuredSiteUrl) ? configuredSiteUrl : "",
-  contactEmail: isEmail(configuredContactEmail) ? configuredContactEmail : "",
+  contactEmail: isEmail(configuredContactEmail) ? configuredContactEmail : defaultContactEmail,
 };
 
 export const siteContent = {
