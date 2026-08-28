@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { BenefitRows } from "./components/BenefitRows.jsx";
 import { ConversionCta } from "./components/ConversionCta.jsx";
 import { FeaturedEditorial } from "./components/FeaturedEditorial.jsx";
@@ -19,11 +19,12 @@ import { siteContent } from "./data/siteContent.js";
 import { applySeoMeta } from "./utils/seo.js";
 import { scrollToId } from "./utils/scroll.js";
 import { AgencyHome } from "./components/AgencyHome.jsx";
-import { AgencyRouter } from "./components/AgencyPages.jsx";
 import "./styles/agency.css";
 
+const AgencyRouter = lazy(() => import("./components/AgencyPages.jsx").then((module) => ({ default: module.AgencyRouter })));
+
 const sectionIds = [...siteContent.navItems.map((item) => item.id), "footer"];
-const pageVariant = String(import.meta.env.VITE_PAGE_VARIANT || "etsy").trim().toLowerCase();
+const pageVariant = String(import.meta.env.VITE_PAGE_VARIANT || "agency").trim().toLowerCase();
 
 function getInitialTheme() {
   if (typeof window === "undefined") return "light";
@@ -99,6 +100,7 @@ function EtsyLanding() {
 }
 
 export function App() {
-  if (pageVariant !== "agency") return <EtsyLanding />;
-  return window.location.pathname === "/" ? <AgencyHome /> : <AgencyRouter />;
+  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+  if (pathname === "/etsy" || pageVariant === "etsy") return <EtsyLanding />;
+  return pathname === "/" ? <AgencyHome /> : <Suspense fallback={null}><AgencyRouter /></Suspense>;
 }

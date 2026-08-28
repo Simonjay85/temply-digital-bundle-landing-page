@@ -26,8 +26,14 @@ const upsertLink = (rel, href) => {
 export function applySeoMeta() {
   if (typeof document === "undefined") return;
 
+  // The production HTML is optimized for the DaisyLexi root route. When the
+  // legacy Etsy landing is rendered at /etsy, remove the root-route schema so
+  // crawlers see only the Product structured data generated below.
+  document.getElementById("daisylexi-webpage-schema")?.remove();
+
+  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
   const canonicalUrl = runtimeConfig.siteUrl
-    ? `${runtimeConfig.siteUrl}/`
+    ? `${runtimeConfig.siteUrl}${pathname === "/" ? "/" : `${pathname}/`}`
     : window.location.href.split("#")[0];
   const imageUrl = runtimeConfig.siteUrl
     ? new URL(heroPreview, `${runtimeConfig.siteUrl}/`).toString()

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "../motion/gsap.js";
 import { runtimeConfig } from "../data/siteContent.js";
 import { agencyProjects, agencyRouteMeta, agencyServices } from "../data/agencyPages.js";
+import "../styles/agency-pages.css";
 
 const primaryNav = [
   ["Works", "/work/"],
