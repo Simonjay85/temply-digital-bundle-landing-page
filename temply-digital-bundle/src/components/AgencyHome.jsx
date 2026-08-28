@@ -2,17 +2,17 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "../motion/gsap.js";
 
 const projects = [
-  ["Growth operating system", "Paid media · Analytics · CRO", "project-a"],
-  ["Conversion landing system", "Strategy · Creative · Web", "project-b"],
-  ["SEO content engine", "Search · Content · Measurement", "project-c"],
-  ["AI workflow stack", "Automation · Ops · Intelligence", "project-d"],
+  { title: "Growth operating system", tags: "Paid media · Analytics · CRO", media: "/azurio-media/work-01.webp", className: "project-a" },
+  { title: "Conversion landing system", tags: "Strategy · Creative · Web", media: "/azurio-media/work-02.webp", className: "project-b" },
+  { title: "SEO content engine", tags: "Search · Content · Measurement", media: "/azurio-media/work-03.webp", className: "project-c" },
+  { title: "AI workflow stack", tags: "Automation · Ops · Intelligence", media: "/azurio-media/work-04.webp", className: "project-d" },
 ];
 
 const services = [
-  ["Performance marketing", "Paid social · Paid search · Native · Creative testing", "Measurement · Attribution · Budget systems · Reporting"],
-  ["SEO growth systems", "Technical SEO · Content strategy · Topic clusters · Search UX", "Internal linking · Content ops · Measurement · Iteration"],
-  ["Web & conversion", "Landing pages · UX/UI · Message hierarchy · Experimentation", "CRO · Analytics · Speed · E-Commerce journeys"],
-  ["AI growth operations", "Research · Automation · Workflow design · Data enrichment", "Content ops · Lead systems · Reporting · AI assistants"],
+  { title: "Performance marketing", tags: "Paid social · Paid search · Native · Creative testing · Attribution", media: "/azurio-media/service-01.webp" },
+  { title: "SEO growth systems", tags: "Technical SEO · Content architecture · Internal linking · Search UX", media: "/azurio-media/service-02.webp" },
+  { title: "Web & conversion", tags: "Landing pages · UX/UI · CRO · Analytics · E-commerce journeys", media: "/azurio-media/service-03.webp" },
+  { title: "AI growth operations", tags: "Automation · Research · Workflow design · Content ops · Reporting", media: "/azurio-media/service-04.webp" },
 ];
 
 const principles = [
@@ -50,13 +50,19 @@ export function AgencyHome() {
     return () => document.body.classList.remove("az-body");
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   useLayoutEffect(() => {
-    if (!rootRef.current) return;
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (!rootRef.current || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      gsap.from(".az-hero__title > span, .az-hero__title > small", { yPercent: 110, duration: 1, stagger: 0.05, ease: "power4.out" });
-      gsap.from(".az-fade", { opacity: 0, y: 22, duration: 0.8, stagger: 0.05, ease: "power3.out", delay: 0.25 });
+      gsap.from(".az-hero__title > span, .az-hero__title > small", { yPercent: 110, duration: 1.05, stagger: 0.07, ease: "power4.out" });
+      gsap.from(".az-fade", { opacity: 0, y: 24, duration: 0.85, stagger: 0.06, ease: "power3.out", delay: 0.25 });
+      gsap.utils.toArray(".az-reveal").forEach((element) => {
+        gsap.from(element, { opacity: 0, y: 42, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 90%", once: true } });
+      });
     }, rootRef);
     return () => ctx.revert();
   }, []);
@@ -88,10 +94,8 @@ export function AgencyHome() {
           </div>
         </section>
 
-        <div className="az-hero-media" aria-hidden="true">
-          <div className="az-hero-media__stone az-hero-media__stone--one" />
-          <div className="az-hero-media__stone az-hero-media__stone--two" />
-          <div className="az-hero-media__ring" />
+        <div className="az-hero-media" aria-label="Abstract geometric motion study">
+          <video src="/azurio-media/hero-stone.mp4" autoPlay muted loop playsInline preload="metadata" />
         </div>
 
         <section className="az-intro" id="about">
@@ -101,46 +105,54 @@ export function AgencyHome() {
 
         <section className="az-works" id="works">
           <div className="az-project-grid">
-            {projects.map(([title, tags, cls], index) => (
-              <article className={`az-project ${cls}`} key={title + index}>
+            {projects.map((project, index) => (
+              <article className={`az-project ${project.className} az-reveal`} key={project.title}>
                 <div className="az-project__media">
-                  <div className="az-art-shape" />
-                  <div className="az-art-card"><small>DAISYLEXI®</small><strong>{String(index + 1).padStart(2, "0")}</strong></div>
+                  <img src={project.media} alt="" loading={index > 1 ? "lazy" : "eager"} />
                 </div>
-                <div className="az-project__meta"><h3>{title}</h3><span>{tags}</span></div>
+                <div className="az-project__meta">
+                  <h3>{project.title}</h3>
+                  <span>{project.tags}</span>
+                </div>
               </article>
             ))}
           </div>
-          <a className="az-allworks" href="#services">All Works <Arrow /></a>
+          <a className="az-allworks" href="/work/">All Works <Arrow /></a>
         </section>
 
-        <section className="az-proof" aria-label="Creative showcase">
-          <div className="az-proof__grid">
-            {["Paid media","Measurement","CRO systems","SEO architecture","AI operations","E-commerce growth"].map((label,index)=><article key={label} className={`az-proof__item az-proof__item--${index+1}`}><div className="az-proof__shape"/><span>{label}</span><i>{String(index+1).padStart(2,"0")}</i></article>)}
-          </div>
+        <section className="az-wide-study az-reveal" aria-label="DaisyLexi visual systems">
+          <img src="/azurio-media/work-wide.webp" alt="" loading="lazy" />
+          <div><span>Creative systems</span><strong>Make every channel feel connected.</strong></div>
         </section>
 
         <section className="az-marquee" aria-hidden="true">
           <div className="az-marquee__track">
-            {[0,1].map(copy => <div className="az-marquee__set" key={copy}>
-              {['Performance/','SEO/','Conversion/','eCommerce/','Automation/'].map(item => <span key={item}>{item}</span>)}
+            {[0, 1].map((copy) => <div className="az-marquee__set" key={copy}>
+              {['Performance/','SEO/','Conversion/','eCommerce/','Automation/'].map((item) => <span key={item}>{item}</span>)}
             </div>)}
           </div>
         </section>
 
         <section className="az-services" id="services">
-          {services.map(([title, line1, line2], index) => (
-            <article className="az-service" key={title}>
-              <div className="az-service__index">0{index + 1}</div>
-              <div className="az-service__copy"><div>{line1}</div><div>{line2}</div></div>
-              <h2>{title}</h2>
-              <div className={`az-service__visual az-service__visual--${index + 1}`}><span>{index + 1}</span></div>
+          <div className="az-services__head az-reveal">
+            <span>/ Capabilities</span>
+            <h2>Systems that move together.</h2>
+          </div>
+          {services.map((service, index) => (
+            <article className="az-service-stack" key={service.title}>
+              <img src={service.media} alt="" loading={index > 0 ? "lazy" : "eager"} />
+              <div className="az-service-stack__overlay">
+                <span>0{index + 1}</span>
+                <h3>{service.title}</h3>
+                <p>{service.tags}</p>
+                <a href="/services/">Explore <Arrow /></a>
+              </div>
             </article>
           ))}
         </section>
 
         <section className="az-testimonials">
-          <div className="az-section-title"><span>How growth</span><span>should work</span></div>
+          <div className="az-section-title az-reveal"><span>How growth</span><span>should work</span></div>
           <div className="az-testimonial-grid">
             {principles.map(([quote, name, role], index) => (
               <article className="az-quote" key={name}>
@@ -153,7 +165,7 @@ export function AgencyHome() {
         </section>
 
         <section className="az-news">
-          <div className="az-section-title"><span>Growth</span><span>notes</span></div>
+          <div className="az-section-title az-reveal"><span>Growth</span><span>notes</span></div>
           <a className="az-news__overview" href="#contact">Discuss a system <Arrow /></a>
           <div className="az-news-grid">
             <article><span>Measurement · CRO · 6 mins</span><h3>Build landing pages that learn from paid traffic</h3><div>DaisyLexi · Growth systems</div><p>A landing page should do more than convert one campaign. The best ones make message-market fit visible, create reusable creative insights and improve the next media decision.</p></article>
@@ -162,6 +174,8 @@ export function AgencyHome() {
         </section>
 
         <section className="az-contact" id="contact">
+          <video src="/azurio-media/hero-stone.mp4" autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
+          <div className="az-contact__shade" />
           <span>Write a line</span>
           <a href={contactHref}>Let's build your growth system <Arrow /></a>
         </section>
@@ -174,10 +188,10 @@ export function AgencyHome() {
       </main>
 
       <footer className="az-footer">
-        <div><span>/ Discover</span><a href="#top">Home</a><a href="#about">About us</a><a href="#works">Case studies</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+        <div><span>/ Discover</span><a href="#top">Home</a><a href="#about">About us</a><a href="/work/">Case studies</a><a href="/services/">Services</a><a href="#contact">Contact</a></div>
         <div><span>/ Contact</span><a href={contactHref}>{contactEmail}</a><a href="#contact">Start a project ↗</a></div>
         <div><span>/ Focus</span><a href="#services">Performance</a><a href="#services">SEO</a><a href="#services">AI systems</a></div>
-        <div><span>/ Explore</span><a href="#works">[01] Systems</a><a href="#services">[02] Capabilities</a><a href="#about">[03] Approach</a><a href="#contact">[04] Contact</a></div>
+        <div><span>/ Explore</span><a href="/work/">[01] Systems</a><a href="/services/">[02] Capabilities</a><a href="#about">[03] Approach</a><a href="#contact">[04] Contact</a></div>
         <div className="az-footer__bottom"><a href="#top">Back to Top</a><strong>DaisyLexi</strong><span>Independent growth systems studio ©2026</span></div>
       </footer>
 
