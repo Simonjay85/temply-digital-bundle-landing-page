@@ -64,10 +64,24 @@ export function AgencyHeader({ currentPath = "/", menuOpen = false, onMenuOpen, 
 }
 
 export function CapabilityRail({ currentPath = "/", home = false }) {
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || !window.matchMedia?.("(max-width: 760px)").matches) return undefined;
+
+    const active = track.querySelector("a.is-active");
+    const nextLeft = active
+      ? Math.max(0, active.offsetLeft - ((track.clientWidth - active.clientWidth) / 2))
+      : 0;
+    const frame = window.requestAnimationFrame(() => track.scrollTo({ left: nextLeft, behavior: "auto" }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [currentPath]);
+
   return (
     <nav className={`dl-capability-rail ${home ? "dl-capability-rail--home" : ""}`} aria-label="DaisyLexi core capabilities">
       <span className="dl-capability-rail__label">Five connected systems</span>
-      <div className="dl-capability-rail__track">
+      <div className="dl-capability-rail__track" ref={trackRef}>
         {capabilityNav.map(([index, label, href]) => (
           <a className={isCurrentPath(currentPath, href) ? "is-active" : ""} href={href} aria-current={isCurrentPath(currentPath, href) ? "page" : undefined} key={href}>
             <span>{index}</span><strong>{label}</strong><i aria-hidden="true" />
@@ -168,7 +182,7 @@ export function AgencyFooter() {
       </div>
       <div className="dl-footer__links"><span>Explore</span><a href="/work/">Work</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
       <div className="dl-footer__links"><span>Systems</span>{capabilityNav.map(([, label, href]) => <a href={href} key={href}>{label}</a>)}</div>
-      <div className="dl-footer__links"><span>Connect</span><a href={contactHref}>{contactEmail}</a><a href="/contact/">Start a project ↗</a><a href="/etsy/">DaisyLexi Lab / Etsy ↗</a></div>
+      <div className="dl-footer__links"><span>Connect</span><a href={contactHref}>{contactEmail}</a><a href="/contact/">Start a project ↗</a></div>
       <div className="dl-footer__bottom"><span>© {year} DaisyLexi</span><span>Performance · SEO · Conversion · Analytics · AI</span><a href="#top">Back to top ↑</a></div>
     </footer>
   );

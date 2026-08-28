@@ -31,7 +31,6 @@ const agencyRoutes = [
   "/services/",
   "/about/",
   "/contact/",
-  "/etsy/",
   ...agencyProjects.map((project) => `/work/${project.slug}/`),
   ...agencyServices.map((service) => `/services/${service.slug}/`),
 ];
