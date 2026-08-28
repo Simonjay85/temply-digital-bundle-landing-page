@@ -3,10 +3,10 @@ import { gsap } from "../motion/gsap.js";
 import { runtimeConfig } from "../data/siteContent.js";
 
 const navItems = [
-  { label: "Works", href: "#works" },
-  { label: "Services", href: "#services" },
-  { label: "Studio", href: "#studio" },
-  { label: "Notes", href: "#notes" },
+  { label: "Works", href: "/work/" },
+  { label: "Services", href: "/services/" },
+  { label: "About", href: "/about/" },
+  { label: "Contact", href: "/contact/" },
 ];
 
 const projects = [
@@ -16,6 +16,7 @@ const projects = [
     type: "Brand / Web / Commerce",
     visual: "editorial",
     note: "Studio study",
+    href: "/work/editorial-commerce/",
   },
   {
     number: "02",
@@ -23,6 +24,7 @@ const projects = [
     type: "Landing / CRO / Motion",
     visual: "campaign",
     note: "Studio study",
+    href: "/work/campaign-architecture/",
   },
   {
     number: "03",
@@ -38,6 +40,7 @@ const projects = [
     type: "Interface / Systems / Build",
     visual: "product",
     note: "Studio study",
+    href: "/work/product-ecosystems/",
   },
 ];
 
@@ -47,24 +50,28 @@ const services = [
     title: "Innovative design",
     tags: ["UI/UX", "Web design", "Applications", "Art direction", "Motion", "Design systems"],
     visual: "design",
+    href: "/services/innovative-design/",
   },
   {
     number: "02",
     title: "Creative development",
     tags: ["Frontend", "Interactions", "Responsive build", "E-commerce", "Performance", "Maintenance"],
     visual: "development",
+    href: "/services/creative-development/",
   },
   {
     number: "03",
     title: "Brand identity",
     tags: ["Positioning", "Verbal direction", "Visual identity", "Guidelines", "Rebranding", "Creative systems"],
     visual: "brand",
+    href: "/services/brand-identity/",
   },
   {
     number: "04",
     title: "Campaign systems",
     tags: ["Landing pages", "CRO", "Paid traffic", "SEO foundations", "Attribution", "Creative testing"],
     visual: "campaigns",
+    href: "/services/campaign-systems/",
   },
 ];
 
@@ -310,9 +317,9 @@ export function AgencyHome() {
       <div className="az-scroll-progress" aria-hidden="true"><i /></div>
 
       <header className="az-header">
-        <a className="az-logo" href="#top" aria-label="DaisyLexi home"><Mark /><span>DaisyLexi</span></a>
+        <a className="az-logo" href="/" aria-label="DaisyLexi home"><Mark /><span>DaisyLexi</span></a>
         <div className="az-header__actions">
-          <a className="az-hello" href={contactHref}>Say Hello</a>
+          <a className="az-hello" href="/contact/">Say Hello</a>
           <button className="az-theme" onClick={toggleTheme} aria-label={`Switch to ${theme === "day" ? "night" : "day"} mode`}>
             {theme === "day" ? "Night" : "Day"}
           </button>
@@ -345,7 +352,7 @@ export function AgencyHome() {
 
         <section className="az-about az-section" id="studio">
           <div className="az-section-no az-reveal">/ 01</div>
-          <a className="az-about__label az-reveal" href="#services">A few words <Arrow diagonal /></a>
+          <a className="az-about__label az-reveal" href="/about/">A few words <Arrow diagonal /></a>
           <p className="az-about__statement az-reveal">Digital design keeps moving. DaisyLexi builds clear, character-rich systems that stay useful when the screen size, campaign or product changes.</p>
           <div className="az-about__art az-reveal" aria-hidden="true">
             <div className="az-about__art-main"><span>IDEA</span><i>→</i><strong>SYSTEM</strong></div>
@@ -377,7 +384,7 @@ export function AgencyHome() {
               );
             })}
           </div>
-          <a className="az-text-link az-reveal" href="#services">All capabilities <Arrow /></a>
+          <a className="az-text-link az-reveal" href="/work/">All work <Arrow /></a>
         </section>
 
         <section className="az-marquee" aria-label="Creative disciplines">
@@ -398,7 +405,7 @@ export function AgencyHome() {
           </div>
           <div className="az-service-list">
             {services.map((service) => (
-              <article className="az-service az-reveal" key={service.number}>
+              <a className="az-service az-reveal" href={service.href} key={service.number}>
                 <span className="az-service__number">{service.number}</span>
                 <div className={`az-service__visual az-service__visual--${service.visual}`} aria-hidden="true"><i /><b>{service.number}</b><span>DL</span></div>
                 <div className="az-service__content">
@@ -406,9 +413,10 @@ export function AgencyHome() {
                   <div className="az-service__tags">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
                 </div>
                 <Arrow diagonal />
-              </article>
+              </a>
             ))}
           </div>
+          <a className="az-text-link az-reveal" href="/services/">Explore all services <Arrow /></a>
         </section>
 
         <section className="az-notes az-section" id="notes">
@@ -439,7 +447,7 @@ export function AgencyHome() {
 
         <section className="az-contact az-section" id="contact">
           <span className="az-contact__small az-reveal">Write a line</span>
-          <a className="az-contact__title az-reveal" href={contactHref}>Let&apos;s talk about<br />your project <Arrow diagonal /></a>
+          <a className="az-contact__title az-reveal" href="/contact/">Let&apos;s talk about<br />your project <Arrow diagonal /></a>
           <div className="az-contact__meta az-reveal">
             <span>Brand systems</span><span>Creative websites</span><span>Landing pages</span><span>Digital experiments</span>
           </div>
@@ -454,10 +462,10 @@ export function AgencyHome() {
 
       <footer className="az-footer">
         <div className="az-footer__columns">
-          <div><span>/ Discover</span><a href="#top">Home</a><a href="#studio">About</a><a href="#works">Works</a><a href="#services">Services</a></div>
+          <div><span>/ Discover</span><a href="/">Home</a><a href="/about/">About</a><a href="/work/">Works</a><a href="/services/">Services</a></div>
           <div><span>/ Contact</span>{runtimeConfig.contactEmail ? <a href={contactHref}>{runtimeConfig.contactEmail}</a> : <p>Project inbox available on request.</p>}<a href="/etsy/">Lab / Etsy</a></div>
-          <div><span>/ Info</span><a href="#notes">Studio notes</a><a href="#contact">Start a project</a></div>
-          <div><span>/ Ecosystem</span><a href="#works">[01] Work</a><a href="#services">[02] Capabilities</a><a href="/etsy/">[03] Lab</a></div>
+          <div><span>/ Info</span><a href="#notes">Studio notes</a><a href="/contact/">Start a project</a></div>
+          <div><span>/ Ecosystem</span><a href="/work/">[01] Work</a><a href="/services/">[02] Capabilities</a><a href="/etsy/">[03] Lab</a></div>
         </div>
         <a className="az-footer__top" href="#top">Back to Top ↑</a>
         <div className="az-footer__word">DaisyLexi</div>
@@ -465,11 +473,10 @@ export function AgencyHome() {
       </footer>
 
       <div className={`az-menu ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen}>
-        <div className="az-menu__top"><a className="az-logo" href="#top" onClick={() => setMenuOpen(false)}><Mark /><span>DaisyLexi</span></a><button onClick={() => setMenuOpen(false)}>Close ×</button></div>
+        <div className="az-menu__top"><a className="az-logo" href="/" onClick={() => setMenuOpen(false)}><Mark /><span>DaisyLexi</span></a><button onClick={() => setMenuOpen(false)}>Close ×</button></div>
         <div className="az-menu__tagline">Innovative design<br />and creative development</div>
         <nav className="az-menu__nav">
           {navItems.map((item, index) => <a href={item.href} onClick={() => setMenuOpen(false)} key={item.href}><span>/ 0{index + 1}</span><b>{item.label}</b><Arrow diagonal /></a>)}
-          <a href={contactHref} onClick={() => setMenuOpen(false)}><span>/ 05</span><b>Contact</b><Arrow diagonal /></a>
         </nav>
         <div className="az-menu__foot"><span>DaisyLexi / Creative Development Studio</span><a href="/etsy/">Lab 001 ↗</a></div>
       </div>

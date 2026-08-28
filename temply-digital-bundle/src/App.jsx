@@ -19,6 +19,7 @@ import { siteContent } from "./data/siteContent.js";
 import { applySeoMeta } from "./utils/seo.js";
 import { scrollToId } from "./utils/scroll.js";
 import { AgencyHome } from "./components/AgencyHome.jsx";
+import { AgencyRouter } from "./components/AgencyPages.jsx";
 import "./styles/agency.css";
 
 const sectionIds = [...siteContent.navItems.map((item) => item.id), "footer"];
@@ -98,5 +99,6 @@ function EtsyLanding() {
 }
 
 export function App() {
-  return pageVariant === "agency" ? <AgencyHome /> : <EtsyLanding />;
+  if (pageVariant !== "agency") return <EtsyLanding />;
+  return window.location.pathname === "/" ? <AgencyHome /> : <AgencyRouter />;
 }
