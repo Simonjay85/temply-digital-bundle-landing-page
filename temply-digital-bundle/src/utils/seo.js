@@ -26,7 +26,9 @@ const upsertLink = (rel, href) => {
 export function applySeoMeta() {
   if (typeof document === "undefined") return;
 
-  const canonicalUrl = runtimeConfig.siteUrl || window.location.href.split("#")[0];
+  const canonicalUrl = runtimeConfig.siteUrl
+    ? `${runtimeConfig.siteUrl}/`
+    : window.location.href.split("#")[0];
   const imageUrl = runtimeConfig.siteUrl
     ? new URL(heroPreview, `${runtimeConfig.siteUrl}/`).toString()
     : heroPreview;
