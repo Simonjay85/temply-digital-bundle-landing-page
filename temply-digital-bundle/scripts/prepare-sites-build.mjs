@@ -27,7 +27,7 @@ const pageVariant = String(process.env.VITE_PAGE_VARIANT || "agency").trim().toL
 
 if (pageVariant === "agency") {
   const title = "DaisyLexi — Performance Marketing, SEO & AI Growth Systems";
-  const description = "DaisyLexi builds performance marketing, SEO, conversion, e-commerce and AI automation systems for digital businesses.";
+  const description = "DaisyLexi designs connected growth systems for performance marketing, SEO, landing pages, conversion, analytics and AI-driven operations.";
   const contactEmail = String(process.env.VITE_CONTACT_EMAIL || "hello@daisylexi.com").trim();
   const canonical = /^https?:\/\/[^\s]+$/i.test(siteUrl) ? `${siteUrl}/` : "";
   const socialImage = canonical ? `${canonical}agency-social.jpg` : "/agency-social.jpg";
@@ -54,7 +54,7 @@ if (pageVariant === "agency") {
       description,
       email: contactEmail,
       areaServed: "Worldwide",
-      serviceType: ["Performance Marketing", "SEO", "Conversion Rate Optimization", "E-Commerce Growth", "AI Automation"],
+      serviceType: ["Performance Marketing", "SEO Growth Systems", "Landing Pages & Web Conversion", "Analytics & Measurement", "AI Growth Operations"],
       ...(canonical ? { url: canonical } : {}),
     })}</script>`,
   ].filter(Boolean).join("\n    ");
