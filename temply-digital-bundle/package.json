@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && node scripts/prepare-sites-build.mjs",
+    "dev": "vite live-baseline",
+    "dev:legacy-temply": "vite",
+    "build": "node scripts/build-live-baseline.mjs",
+    "build:legacy-temply": "vite build && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
     "qa:capture": "node scripts/capture-visual-qa.mjs",
     "qa:local": "node scripts/capture-visual-qa.mjs",
+    "qa:live-parity": "node scripts/qa-live-parity.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },
   "dependencies": {
